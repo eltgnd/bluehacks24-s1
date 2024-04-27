@@ -10,14 +10,10 @@ st.set_page_config(page_title='[NAME] Students\' Portal', page_icon='🌱', layo
 cf.load_initial_data_if_needed(force = True)
 
 # Google Sheets Connection
-member_database = st.secrets['student_database']
-conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(spreadsheet=member_database)
-
+conn = st.connection("user", type=GSheetsConnection)
 
 # Title
 st.caption('Student Page')
-add_vertical_space(1)
 st.title('Welcome')
 add_vertical_space(2)
 
@@ -26,24 +22,25 @@ add_vertical_space(2)
 def check_password():
 
     # Sample
-    st.write('Try this sample student ID: 222390')
+    st.write('Try this sample student ID: 222390, password: 123456')
 
     # Log-in
     def log_in():
         with st.form('Credentials'):
-            st.text_input("Enter your User ID")
+            st.text_input("Enter your student ID", type='default', key='student_id')
             st.text_input("Enter your password", type="password", key="password")
             st.form_submit_button("Log-in", on_click=password_entered)
  
     def password_entered():
-        if df['Student ID'].eq(st.session_state['password']).any():
-            st.session_state["password_correct"] = True
+        sql = 'SELECT * FROM Sheet1;'
+        df = conn.query(sql=sql, ttl=0) 
 
-            # store member info from database
-            member_id = st.session_state['password']
-            member_info = df[df['Student ID'] == member_id].to_dict('records')
-            st.session_state['member_info'] = member_info
-            
+        st.write(df)
+
+        match = (df['user_id'].eq(st.session_state.student_id) & df['password'].eq(st.session_state.password)).any()
+        if match:
+            st.session_state["password_correct"] = True  
+            st.session_state['name'] = df[df.user_id == st.session_state.student_id].reset_index().at[0,'nickname']
         else:
             st.session_state["password_correct"] = False
 
@@ -57,19 +54,3 @@ def check_password():
 
 if not check_password():
     st.stop()
-
-
-# Welcome
-# show_pages(
-#     [
-#         Page('Admin/Home.py', 'Log-in', '👤'),
-#         Page('Admin/menu_pages/dashboard.py', 'Project Blue Dashboard', '📊'),
-#         Page('Admin/menu_pages/reports.py', 'Project Reports', '📄'),
-#         Page('Admin/menu_pages/members.py', 'Members', '✋'),
-#         Page('Admin/menu_pages/exit.py', 'Exit Process', '👋')
-#     ]
-# 
-# )
-
-# switch_page('project blue dashboard')
-# hide_pages(['log-in'])

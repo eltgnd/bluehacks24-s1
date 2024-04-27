@@ -1,36 +1,64 @@
 import streamlit as st
 
+def update_gq(ans):
+    st.session_state.ga.append(ans)
+    st.session_state.gq += 1
+
+    st.write(st.session_state.gq)
+
+    if st.session_state.gq > 12:
+        st.session_state.gq = 0
 
 # Welcome
-name = 'Val'
-st.title(f'Hi {name}. Kumusta ka?')
+name = st.session_state.name
+st.title(f'Hi {name.capitalize()}. 👋 Kumusta ka?')
 
 # Choose survey
-st.caption('Answer a wellness survey today.')
-options = ['Weekly Well-being', 'Monthly Check-up']
-choice = st.radio('What do you want to answer?', options)
+with st.container(border=True):
+    options = ['Weekly Well-being', 'Monthly Check-up']
+    choice = st.radio('What do you want to answer?', options)
 
 # General Health Questionnaire
 if choice == options[0]:
-    form1 = st.form('General Well-being')
 
-    questions = """Able to concentrate
-    Loss of sleep over worry
-    Playing a useful part
-    Capable of making decisions
-    Felt constantly under strain
-    Couldn’t overcome difficulties
-    Able to enjoy day-to-day activities
-    Able to face problems
-    Feeling unhappy and depressed
-    Losing confidence
-    Thinking of self as worthless
-    Feeling reasonably happy"""
+    st.session_state.gq = 1
+    st.session_state.ga = []
+
+    questions = """I can concentrate regularly.
+    I lose sleep over worrying.
+    I play a useful role in the community.
+    I can make the right decisions for myself.
+    I am always under stress.
+    I cannot overcome challenges.
+    I enjoy day-to-day activities.
+    I can face problems.
+    I feel sad and anxious.
+    I lose confidence.
+    I see myself as worthless.
+    I feel reasonably happy."""
+
+    question_lst = questions.split('\n')
 
     st.write('In a scale of 1 to 4, how well do you resonate with the following statements or questions?')
-    for i in questions.split('\n'):
-        form1.slider(i.strip(), 1,4,1,1)
-    form1.form_submit_button('Submit')
+
+    # Place question
+    gq = st.session_state.gq
+    if gq == 0:
+        st.write('Successfully submitted!')
+    else:
+        st.caption(f'Question {gq} of 12')
+        ans = st.slider(question_lst[gq].strip(), 1,4,1,1)
+        submit = st.button('Submit', on_click=update_gq(ans))
+
+    # for i in range(len(question_lst)):
+    #     form = st.form(f'g{i}')
+    #     with previous.container():
+    #         st.caption(f'Question {i} of 12')
+    #         val = form.slider(question_lst[i].strip(), 1,4,1,1)
+    #         submitted = form.form_submit_button('Submit')
+    #     if submitted:
+    #         answers.append(val)
+    
 
 
 # Monthly Check-up
@@ -55,3 +83,10 @@ if choice == options[1]:
     for i in questions.split('\n'):
         form2.slider(i.strip(), 1,7,1,1)
     form2.form_submit_button("Submit")
+
+
+# View data
+# conn = st.connection("survey", type=GSheetsConnection)
+
+# df = conn.read(worksheet = "Sheet1", ttl=0)
+
