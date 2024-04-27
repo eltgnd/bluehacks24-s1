@@ -45,4 +45,4 @@ dependencies:
     - st-gsheets-connection
     - streamlit-extras 
     - st-pages
-    - streamlit_image_select
+    - streamlit-image-select

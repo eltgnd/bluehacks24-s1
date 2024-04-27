@@ -24,4 +24,4 @@ beautifulsoup4==4.12
 pip==24.0
 
 streamlit-extras
-streamlit_image_select
+streamlit-image-select
