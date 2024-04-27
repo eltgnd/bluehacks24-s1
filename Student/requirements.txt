@@ -27,3 +27,5 @@ streamlit-extras
 streamlit-image-select
 st-pages
 st-gsheets-connection
+pytube
+art
