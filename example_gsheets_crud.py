@@ -10,6 +10,7 @@ st.title("Read Google Sheet as DataFrame")
 # user
 
 conn = st.connection("(KEYWORD)", type=GSheetsConnection)
+conn.query()
 
 updated_orders = pd.DataFrame({
     'OrderID': [101, 102, 103, 104, 105],
@@ -36,6 +37,6 @@ if st.button("Update Worksheet"):
     st.success("Worksheet Updated")
 
 # READ THE ENTIRE WORKSHEET
-df = conn.read(worksheet = "Sheet1", ttl = 10)
+df = conn.read(worksheet = "Sheet1", ttl = 0)
 
 st.dataframe(df)
