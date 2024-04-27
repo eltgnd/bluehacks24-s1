@@ -152,7 +152,7 @@ if choice == options[2]:
     question_lst = questions.split('\n')
 
     add_vertical_space(1)
-    st.write('💡 In a scale of 1 to 7, how well do you resonate with the following statements or questions?')
+    st.write('💡 On a scale of 1 to 7, how well do you resonate with the following statements or questions?')
 
     # Place question
     options = [str(i) for i in range(1,8)]
