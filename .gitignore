@@ -12,7 +12,7 @@
 /Student/*.bat
 /Guidance/*.bat
 /Student/*.command
-/Guidance/*.bat
+/Guidance/*.command
 
 .DS_Store
 
