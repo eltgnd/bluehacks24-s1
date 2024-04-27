@@ -9,6 +9,63 @@ from bs4 import BeautifulSoup
 
 import control_flow as cf
 
+def date_time_parser(dt):
+    '''
+    Function by Muralidhar (2021).
+    Returns the time elapsed (in minutes) since the news was published
+    
+    dt: str
+        published date
+        
+    Returns
+    int: time elapsed (in minutes)
+    '''
+    return int(np.round((dt.now(dt.tz) - dt).total_seconds() / 60, 0))
+
+def elapsed_time_str(mins):
+    '''
+    Function from Muralidhar (2021).
+    Returns the word form of the time elapsed (in minutes) since the news was published
+    
+    mins: int
+        time elapsed (in minutes)
+        
+    Returns
+    str: word form of time elapsed (in minutes)
+    '''
+    time_str = '' # Initializing a variable that stores the word form of time
+    hours = int(mins / 60) # integer part of hours. Example: if time elapsed is 2.5 hours, then hours = 2
+    days = np.round(mins / (60 * 24), 1) # days elapsed
+    # minutes portion of time elapsed in hours. Example: if time elapsed is 2.5 hours, then remaining_mins = 30
+    remaining_mins = int(mins - (hours * 60))
+    
+    if (days >= 1):
+        time_str = f'{str(days)} days ago' # Example: days = 1.2 => time_str = 1.2 days ago
+        if days == 1:
+            time_str = 'a day ago'  # Example: days = 1 => time_str = a day ago
+            
+    elif (days < 1) & (hours < 24) & (mins >= 60):
+        time_str = f'{str(hours)} hours and {str(remaining_mins)} mins ago' # Example: 2 hours and 15 mins ago
+        if (hours == 1) & (remaining_mins > 1):
+            time_str = f'an hour and {str(remaining_mins)} mins ago' # Example: an hour and 5 mins ago
+        if (hours == 1) & (remaining_mins == 1):
+            time_str = f'an hour and a min ago' # Example: an hour and a min ago
+        if (hours > 1) & (remaining_mins == 1):
+            time_str = f'{str(hours)} hours and a min ago' # Example: 5 hours and a min ago
+        if (hours > 1) & (remaining_mins == 0):
+            time_str = f'{str(hours)} hours ago' # Example: 4 hours ago
+        if ((mins / 60) == 1) & (remaining_mins == 0):
+            time_str = 'an hour ago' # Example: an hour ago
+            
+    elif (days < 1) & (hours < 24) & (mins == 0):
+        time_str = 'Just in' # if minutes == 0 then time_str = 'Just In'
+        
+    else:
+        time_str = f'{str(mins)} minutes ago' # Example: 5 minutes ago
+        if mins == 1:
+            time_str = 'a minute ago'
+    return time_str
+
 def text_clean(desc):
     '''
     Function by Muralidhar (2021).
@@ -40,6 +97,7 @@ def src_parse(rss_url):
     Returns
     str: root domain of RSS feed URL
     '''
+
     rss_url = rss_url.replace("https://www.", "") # removing "https://www." from RSS feed URL
     rss_url = rss_url.replace("https://", "") # If there was no www, remove the https://
     rss_url = rss_url.split("/") # splitting the remaining portion of RSS feed URL by '/'
@@ -76,13 +134,13 @@ def rss_parser(news_item):
     date1 = parser.parse(date) # parsing the date to Timestamp object
     
     # data frame of the processed data
-    return pd.DataFrame({"title": title,
+    return {"title": title,
                         "url": url,
                         "description": desc,
                         "date": date,
-                        "parsed_date": date1}, index=[0])
+                        "parsed_date": date1}
 
-def news_agg(rss_url):
+def news_agg(rss_url, original_url):
     '''
     Function by Muralidhar (2021).
     Processes each RSS Feed URL passed as an input argument
@@ -93,7 +151,7 @@ def news_agg(rss_url):
     Returns
     DataFrame: data frame of data processed from the passed RSS Feed URL
     '''
-    rss_df = pd.DataFrame() # Initializing an empty data frame
+    rss_df_rows = [] # Initializing an empty list for dataframe rows
     # Response from HTTP request
     resp = r.get(
         rss_url,
@@ -102,12 +160,19 @@ def news_agg(rss_url):
     b = BeautifulSoup(resp.content, "xml") # Parsing the HTTP response
 
     items = b.find_all("item") # Storing all the news items
+    
     for i in items:
-        rss_df = rss_df.append(rss_parser(i)).copy() # parsing each news item (<item>)
+        rss_df_rows.append(rss_parser(i)) # parsing each news item (<item>)
+
+    # st.write(pd.DataFrame(rss_df_rows))
+    # raise ValueError
+
+    rss_df = pd.DataFrame(rss_df_rows)
     
     rss_df["description"] = rss_df["description"].replace([" NULL", ''], np.nan) # Few items have 'NULL' as description so replacing NULL with NA
-    rss_df.dropna(inplace=True)  # dropping news items with either of title, URL, description or date, missing
+    rss_df = rss_df.dropna()  # dropping news items with either of title, URL, description or date, missing
     rss_df["src"] = src_parse(rss_url) # extracting the source name from RSS feed URL
+    rss_df["feed_site"] = original_url
     rss_df["elapsed_time"] = rss_df["parsed_date"].apply(date_time_parser) # Computing the time elapsed (in minutes) since the news was published
     rss_df["elapsed_time_str"] = rss_df["elapsed_time"].apply(elapsed_time_str) # Converting the the time elapsed (in minutes) since the news was published into string format
 
@@ -130,26 +195,63 @@ if __name__ == "__main__":
     st.title(f"{emoji} Mental Health Feed")
 
 
-    # Code below is from Muralidhar (2021)---
-    rss = [
-        "https://www.verywellmind.com/news-latest-research-and-trending-topics-4846421",
-        "https://www.helpguide.org/category/mental-health",
-        "https://psychcentral.com/news",
-        "https://www.healthline.com/mental-health"
-    ]
+    # -------Code below is from Muralidhar (2021)
 
-    final_df = pd.DataFrame() # initializing the data frame to store all the news items from all the RSS Feed URLs
-    for i in rss:
-        final_df = final_df.append(news_agg(i))
+    rss = {
+        "https://www.sciencedaily.com/rss/mind_brain/mental_health.xml": "https://www.sciencedaily.com/news/mind_brain/mental_health/",
+        "https://www.helpguide.org/feed": "https://www.helpguide.org/category/mental-health",
+        "https://feeds.npr.org/1029/rss.xml": "https://www.npr.org/sections/mental-health/",
+    }
+
+    final_df_rows = [] # initializing the data frame to store all the news items from all the RSS Feed URLs
+    for rss_url, original_url in rss.items():
+        final_df_rows.append(news_agg(rss_url, original_url))
+    
+    final_df = pd.concat(
+        objs = final_df_rows,
+        axis = 0
+    )
 
     final_df.sort_values(by='elapsed_time', inplace=True) # Sorting the news items by the time elapsed (in minutes) since the news was published
-    final_df['src_time'] = final_df['src'] + ('&nbsp;' * 5) + final_df['elapsed_time_str'] # concatenating the source and the string format of the elapsed time 
-    final_df.drop(columns=['date', 'parsed_date', 'src', 'elapsed_time', 'elapsed_time_str'], inplace=True) 
+    
+    final_df.drop(columns=[
+        'date',
+        'parsed_date',
+        'elapsed_time',
+    ], inplace=True) 
     final_df.drop_duplicates(subset='description', inplace=True) # Dropping news items with duplicate descriptions
-    final_df = final_df.loc[(final_df['title'] != ''), :].copy() # Dropping news items with no title
+    final_df = final_df.loc[(final_df['title'] != ''), :].reset_index(drop = True) # Dropping news items with no title
 
-    # Code above is from Muralidhar (2021)---
+    # ---------Code above is from Muralidhar (2021)
 
-    st.write(final_df)
+
+    # ---------Code below is original
+
+    num_articles_to_show = 20
+
+    for index, row in final_df.loc[0 : num_articles_to_show + 1].iterrows():
+
+        cols = st.columns([0.6,0.4])
+        with cols[0]:
+
+            st.caption(row["elapsed_time_str"])
+
+            st.html("""<style> a {color: black; text-decoration: none;}</style>""")
+
+            st.html(
+                """<h4><a href = "{0}" style = "color: black; text-decoration: none;">{1}</a></h4>
+                
+<a href = "{2}" style = "color: black; text-decoration: none;">{3}</a>""".format(
+                    row['url'],
+                    row['title'],
+                    row['feed_site'],
+                    row['src']
+                )
+            )
+            
+        with cols[1]:
+            st.markdown(row["description"])
+
+        st.divider()
     
     cf.display_copyright()
