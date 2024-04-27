@@ -19,7 +19,7 @@ st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layo
 # Bypass log-in
 st.session_state["password_correct"] = True 
 st.session_state['name'] = 'Richell'
-st.session_state['student_id'] = '123456'
+st.session_state['student_id'] = 's222390'
 
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
@@ -158,8 +158,7 @@ style_metric_cards(border_left_color='#023E8A', border_radius_px=7, box_shadow=F
 st.divider()
 
 # Features Overview
-st.subheader()
-option = st.radio('', ['Mental Health Feed', 'Student Wellbeing', 'Book Appointment', 'Profile', 'Group Chat'])
+option = st.radio('Get to know Bughaw\'s features!', ['Mental Health Feed', 'Student Wellbeing', 'Book Appointment', 'Profile', 'Group Chat'])
 descriptions = {
 'Mental Health Feed':'The Mental Health Feed displays collated articles from various websites that specifically address and provide tips about mental health, such as but not limited to HelpGuide.org and Science Daily',
 'Student Wellbeing':'The Student Dashboard serves as a regular mental wellbeing check-in surveys for your daily mood, weekly general health status, and monthly sense of coherence that altogether holistically assess the status of your mental health.',

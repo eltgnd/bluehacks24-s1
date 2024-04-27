@@ -26,7 +26,7 @@ def update_data(survey_type):
     st.success("Worksheet Updated! 🥳")
 
 def check_streak():
-    sql = f'SELECT Date FROM Sheet1 WHERE "Student ID" = {st.session_state.student_id} ORDER BY Date;'
+    sql = f"""SELECT Date FROM Sheet1 WHERE "Student ID"='{st.session_state.student_id}' ORDER BY Date;"""
     df = conn.query(sql=sql)
     df['Date'] = pd.to_datetime(df['Date'])
     df['Date_Diff'] = df['Date'].diff().dt.days
