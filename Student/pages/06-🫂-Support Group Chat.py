@@ -13,16 +13,12 @@ def groupchat_connect_to_user_database(user_id):
 
     return conn
 
-def groupchat_radio_callback():
-    st.session_state["clear_messages"] = True
-    st.session_state["send_message_was_just_clicked"] = False
-
 if __name__ == "__main__":
 
     emoji = ":speech_balloon:"
 
     st.set_page_config(
-        page_title = "Group Chat",
+        page_title = "Support Group Chat",
         page_icon = emoji,
         initial_sidebar_state = "expanded",
     )
@@ -31,7 +27,7 @@ if __name__ == "__main__":
     cf.load_initial_data_if_needed()
 
     st.caption('BUGHAW   |   STUDENTS\' PORTAL')
-    st.title(f"{emoji} Group Chat")
+    st.title(f"{emoji} Support Group Chat")
     st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
     st.divider()
 
@@ -55,8 +51,6 @@ if __name__ == "__main__":
     
     assigned_counselor = info["assigned_counselor"]
     groupchat_id = info["groupchat_id"]
-
-    st.markdown("### Support Group")
     keyword = "support"
 
     # Preparations to display messages
@@ -111,7 +105,7 @@ if __name__ == "__main__":
     while True:
 
         if not submitted_just_before_last_refresh:
-            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 100).dropna(axis = 0, how = "all")
+            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 3).dropna(axis = 0, how = "all")
 
             # # removed:
             #  WHERE groupchat_id == '{groupchat_id}' ORDER BY time DESC
@@ -126,28 +120,33 @@ if __name__ == "__main__":
 
         with chat_empty:
             with st.container():
+
+                if display_messages.shape[0] == 0:
+                    st.info("There are no messages in this chat yet.")
+
+                else:
         
-                # Display messages
-                for index, row in display_messages.iterrows():
-                    msg_time = row["time"].split(" ")[1][:8]
-                    if row["user_id"] == user_id:
-                        my_cols = st.columns([0.2,0.6,0.2])
-                        with my_cols[1]:
-                            # with st.container(border = True):
-                            st.html(f'<p style = "text-align: right;">{row["message"]}</p>')
-                        with my_cols[2]:
-                            st.caption(msg_time)
-                    else:
-                        other_cols = st.columns([0.6,0.2,0.2])
-                        with other_cols[0]:
-                            # with st.container(border = True):
-                            st.html(f'<p style = "text-align: left;"><b style = "color: gray;">[{row["user_id"]}] </b>{row["message"]}</p>')
-                        with other_cols[2]:
-                            st.caption(msg_time)
+                    # Display messages
+                    for index, row in display_messages.iterrows():
+                        msg_time = row["time"].split(" ")[1][:8]
+                        if row["user_id"] == user_id:
+                            my_cols = st.columns([0.2,0.6,0.2])
+                            with my_cols[1]:
+                                # with st.container(border = True):
+                                st.html(f'<p style = "text-align: right;">{row["message"]}</p>')
+                            with my_cols[2]:
+                                st.caption(msg_time)
+                        else:
+                            other_cols = st.columns([0.6,0.2,0.2])
+                            with other_cols[0]:
+                                # with st.container(border = True):
+                                st.html(f'<p style = "text-align: left;"><b style = "color: gray;">[{row["user_id"]}] </b>{row["message"]}</p>')
+                            with other_cols[2]:
+                                st.caption(msg_time)
 
         if submitted_just_before_last_refresh:
             conn.update(worksheet = "Sheet2", data = full_messages)
 
         submitted_just_before_last_refresh = False 
 
-        time.sleep(120)
+        time.sleep(4)

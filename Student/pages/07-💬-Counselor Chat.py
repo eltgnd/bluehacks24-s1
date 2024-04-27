@@ -26,8 +26,10 @@ if __name__ == "__main__":
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
+    st.caption('BUGHAW   |   STUDENTS\' PORTAL')
     st.title(f"{emoji} Counselor Chat")
+    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    st.divider()
 
     conn = groupchat_connect_to_user_database(user_id = st.session_state["student_id"])
 
