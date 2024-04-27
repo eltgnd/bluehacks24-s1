@@ -10,7 +10,12 @@ global name
 global mood
 global experience
 
-# parameters for now, this will come from survey page:
+# Bypass log-in
+st.session_state["password_correct"] = True 
+st.session_state['name'] = 'Richell'
+st.session_state['student_id'] = 123456
+
+# Parameters for now, this will come from survey page:
 mood = 'Happy'
 name = 'Osen'
 experience = 999
@@ -44,9 +49,6 @@ def check_password():
     def password_entered():
         sql = 'SELECT * FROM Sheet1;'
         df = conn.query(sql=sql, ttl=0) 
-
-        st.write(df)
-
         match = (df['user_id'].eq(st.session_state.student_id) & df['password'].eq(st.session_state.password)).any()
         if match:
             st.session_state["password_correct"] = True  
