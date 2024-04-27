@@ -54,8 +54,17 @@ if __name__ == "__main__":
     assigned_counselor = info["assigned_counselor"]
     groupchat_id = info["groupchat_id"]
 
-    st.markdown("### Support Group")
-    keyword = "support"
+    selected_chat = st.radio(
+        "Chat",
+        ["Support Group", "Your Counselor"],
+        horizontal = True,
+        on_change = groupchat_radio_callback,
+    )
+
+    st.markdown("### Your Counselor")
+    # Instead of using the student's groupchat, use the private chat between the student and the counselor.
+    groupchat_id = f"PRIVATE_{user_id}_{assigned_counselor}"
+    keyword = "counselor"
 
     # Preparations to display messages
 
