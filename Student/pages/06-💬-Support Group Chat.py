@@ -118,24 +118,29 @@ if __name__ == "__main__":
 
         with chat_empty:
             with st.container():
+
+                if display_messages.shape[0] == 0:
+                    st.info("There are no messages in this chat yet.")
+
+                else:
         
-                # Display messages
-                for index, row in display_messages.iterrows():
-                    msg_time = row["time"].split(" ")[1][:8]
-                    if row["user_id"] == user_id:
-                        my_cols = st.columns([0.2,0.6,0.2])
-                        with my_cols[1]:
-                            # with st.container(border = True):
-                            st.html(f'<p style = "text-align: right;">{row["message"]}</p>')
-                        with my_cols[2]:
-                            st.caption(msg_time)
-                    else:
-                        other_cols = st.columns([0.6,0.2,0.2])
-                        with other_cols[0]:
-                            # with st.container(border = True):
-                            st.html(f'<p style = "text-align: left;"><b style = "color: gray;">[{row["user_id"]}] </b>{row["message"]}</p>')
-                        with other_cols[2]:
-                            st.caption(msg_time)
+                    # Display messages
+                    for index, row in display_messages.iterrows():
+                        msg_time = row["time"].split(" ")[1][:8]
+                        if row["user_id"] == user_id:
+                            my_cols = st.columns([0.2,0.6,0.2])
+                            with my_cols[1]:
+                                # with st.container(border = True):
+                                st.html(f'<p style = "text-align: right;">{row["message"]}</p>')
+                            with my_cols[2]:
+                                st.caption(msg_time)
+                        else:
+                            other_cols = st.columns([0.6,0.2,0.2])
+                            with other_cols[0]:
+                                # with st.container(border = True):
+                                st.html(f'<p style = "text-align: left;"><b style = "color: gray;">[{row["user_id"]}] </b>{row["message"]}</p>')
+                            with other_cols[2]:
+                                st.caption(msg_time)
 
         if submitted_just_before_last_refresh:
             conn.update(worksheet = "Sheet2", data = full_messages)
