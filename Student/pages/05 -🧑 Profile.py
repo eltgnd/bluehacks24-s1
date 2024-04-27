@@ -1,6 +1,14 @@
 import streamlit as st
 from PIL import Image
-from Home import *
+global name
+global mood
+
+global experience
+
+# parameters for now, this will come from survey page:
+mood = 'Happy'
+name = 'Osen'
+experience = 999
 
 st.title("🧑 Profile")
 st.write(f'Hello {name}!')
