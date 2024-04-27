@@ -178,24 +178,10 @@ def news_agg(rss_url, original_url):
 
     return rss_df
 
-if __name__ == "__main__":
+@st.cache_data(ttl = 86400, max_entries = 1) # refreshes automatically every day. only stores one value in cache.
+def get_articles(switch):
 
-    emoji = ":newspaper:"
-
-    st.set_page_config(
-        page_title = "Mental Health Feed",
-        page_icon = emoji,
-        initial_sidebar_state = "expanded",
-    )
-
-    # Load initial data if it hasn't already been loaded.
-    cf.load_initial_data_if_needed()
-
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} Mental Health Feed")
-
-
-    # -------Code below is from Muralidhar (2021)
+    """Function from Muralidhar (2021). Get articles from RSS feeds of mental health websites."""
 
     rss = {
         "https://www.sciencedaily.com/rss/mind_brain/mental_health.xml": "https://www.sciencedaily.com/news/mind_brain/mental_health/",
@@ -222,14 +208,38 @@ if __name__ == "__main__":
     final_df.drop_duplicates(subset='description', inplace=True) # Dropping news items with duplicate descriptions
     final_df = final_df.loc[(final_df['title'] != ''), :].reset_index(drop = True) # Dropping news items with no title
 
-    # ---------Code above is from Muralidhar (2021)
+    return final_df
 
+if __name__ == "__main__":
 
-    # ---------Code below is original
+    emoji = ":newspaper:"
+
+    st.set_page_config(
+        page_title = "Mental Health Feed",
+        page_icon = emoji,
+        initial_sidebar_state = "expanded",
+    )
+
+    # Load initial data if it hasn't already been loaded.
+    cf.load_initial_data_if_needed()
+
+    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
+    st.title(f"{emoji} Mental Health Feed")
+
+    if "get_articles_switch_param" not in st.session_state:
+        st.session_state["get_articles_switch_param"] = 1
+
+    articles_df = get_articles(switch = st.session_state["get_articles_switch_param"])
+
+    refresh_cols = st.columns([0.7, 0.3])
+
+    with refresh_cols[1]:
+        if st.button(":arrows_counterclockwise: Refresh feed"):
+            st.session_state["get_articles_switch_param"] = -1 * st.session_state["get_articles_switch_param"]
 
     num_articles_to_show = 20
 
-    for index, row in final_df.loc[0 : num_articles_to_show + 1].iterrows():
+    for index, row in articles_df.loc[0 : num_articles_to_show + 1].iterrows():
 
         cols = st.columns([0.6,0.4])
         with cols[0]:
