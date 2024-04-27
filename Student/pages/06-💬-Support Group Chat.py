@@ -103,7 +103,7 @@ if __name__ == "__main__":
     while True:
 
         if not submitted_just_before_last_refresh:
-            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 100).dropna(axis = 0, how = "all")
+            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 3).dropna(axis = 0, how = "all")
 
             # # removed:
             #  WHERE groupchat_id == '{groupchat_id}' ORDER BY time DESC
@@ -142,4 +142,4 @@ if __name__ == "__main__":
 
         submitted_just_before_last_refresh = False 
 
-        time.sleep(120)
+        time.sleep(4)

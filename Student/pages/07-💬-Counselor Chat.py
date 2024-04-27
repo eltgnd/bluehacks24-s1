@@ -13,10 +13,6 @@ def groupchat_connect_to_user_database(user_id):
 
     return conn
 
-def groupchat_radio_callback():
-    st.session_state["clear_messages"] = True
-    st.session_state["send_message_was_just_clicked"] = False
-
 if __name__ == "__main__":
 
     emoji = ":speech_balloon:"
@@ -98,7 +94,7 @@ if __name__ == "__main__":
                 objs = [existing_df_full, new_row_df],
                 axis = 0,
                 ignore_index = True
-            )
+            ).sort_values("time", ascending = True)
 
         submitted_just_before_last_refresh = submitted
     
@@ -111,7 +107,7 @@ if __name__ == "__main__":
     while True:
 
         if not submitted_just_before_last_refresh:
-            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 100).dropna(axis = 0, how = "all")
+            messages = conn.query(sql=f"SELECT * FROM Sheet2;", ttl = 3).dropna(axis = 0, how = "all")
 
             # # removed:
             #  WHERE groupchat_id == '{groupchat_id}' ORDER BY time DESC
@@ -150,4 +146,4 @@ if __name__ == "__main__":
 
         submitted_just_before_last_refresh = False 
 
-        time.sleep(120)
+        time.sleep(4)
