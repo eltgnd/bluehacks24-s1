@@ -34,7 +34,7 @@ dependencies:
   - pillow=10.0 # conda. for displaying images.
   - beautifulsoup4=4.12
   - pip=24.0 # conda. needed to install packages that only work when pip-installed.
-
+  
   
   # # The lines below are for packages to be pip-installed. Leave these COMMENTED if you won't use them.
   # # The `- pip:` line must be uncommented if you want to use these lines.
@@ -45,3 +45,4 @@ dependencies:
     - st-gsheets-connection
     - streamlit-extras 
     - st-pages
+    - streamlit_image_select

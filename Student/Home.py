@@ -4,6 +4,21 @@ from streamlit_gsheets import GSheetsConnection
 from st_pages import Page, Section,show_pages, add_page_title
 from streamlit_extras.switch_page_button import switch_page
 import control_flow as cf
+from PIL import Image
+
+global name
+global mood
+global experience
+
+# Bypass log-in
+st.session_state["password_correct"] = True 
+st.session_state['name'] = 'Richell'
+st.session_state['student_id'] = 123456
+
+# Parameters for now, this will come from survey page:
+mood = 'Happy'
+name = 'Osen'
+experience = 999
 
 # Initialize
 st.set_page_config(page_title='[NAME] Students\' Portal', page_icon='🌱', layout="centered", initial_sidebar_state="auto", menu_items=None)
