@@ -22,7 +22,7 @@ if __name__ == "__main__":
     emoji = ":speech_balloon:"
 
     st.set_page_config(
-        page_title = "Group Chat",
+        page_title = "Counselor Chat",
         page_icon = emoji,
         initial_sidebar_state = "expanded",
     )
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     cf.load_initial_data_if_needed()
 
     st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} Group Chat")
+    st.title(f"{emoji} Counselor Chat")
 
     conn = groupchat_connect_to_user_database(user_id = st.session_state["student_id"])
 
@@ -54,14 +54,7 @@ if __name__ == "__main__":
     assigned_counselor = info["assigned_counselor"]
     groupchat_id = info["groupchat_id"]
 
-    selected_chat = st.radio(
-        "Chat",
-        ["Support Group", "Your Counselor"],
-        horizontal = True,
-        on_change = groupchat_radio_callback,
-    )
-
-    st.markdown("### Your Counselor")
+    st.markdown("### Counselor Chat")
     # Instead of using the student's groupchat, use the private chat between the student and the counselor.
     groupchat_id = f"PRIVATE_{user_id}_{assigned_counselor}"
     keyword = "counselor"

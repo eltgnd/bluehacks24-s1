@@ -13,16 +13,12 @@ def groupchat_connect_to_user_database(user_id):
 
     return conn
 
-def groupchat_radio_callback():
-    st.session_state["clear_messages"] = True
-    st.session_state["send_message_was_just_clicked"] = False
-
 if __name__ == "__main__":
 
     emoji = ":speech_balloon:"
 
     st.set_page_config(
-        page_title = "Group Chat",
+        page_title = "Support Group Chat",
         page_icon = emoji,
         initial_sidebar_state = "expanded",
     )
@@ -31,7 +27,7 @@ if __name__ == "__main__":
     cf.load_initial_data_if_needed()
 
     st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} Group Chat")
+    st.title(f"{emoji} Support Group Chat")
 
     conn = groupchat_connect_to_user_database(user_id = st.session_state["student_id"])
 
@@ -53,8 +49,6 @@ if __name__ == "__main__":
     
     assigned_counselor = info["assigned_counselor"]
     groupchat_id = info["groupchat_id"]
-
-    st.markdown("### Support Group")
     keyword = "support"
 
     # Preparations to display messages
