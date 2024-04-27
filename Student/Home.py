@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_gsheets import GSheetsConnection
 from st_pages import Page, Section,show_pages, add_page_title
-from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_image_select import image_select
@@ -19,7 +18,7 @@ st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layo
 # Bypass log-in
 st.session_state["password_correct"] = True 
 st.session_state['name'] = 'Richell'
-st.session_state['student_id'] = 's222390'
+st.session_state['student_id'] = 's222869'
 
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
