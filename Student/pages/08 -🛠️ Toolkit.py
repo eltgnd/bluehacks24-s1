@@ -6,12 +6,12 @@ from streamlit.components.v1 import html
 st.title("Toolkit")
 
 # Assuming mood and mood_list are defined elsewhere
-#mood = st.session_state['mood']
+mood = st.session_state['mood']
 mood_list = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "Sad", "Angry"]
 path = ['happy', 'amused', 'inspired', 'dont_care', 'annoyed', 'afraid', 'sad', 'angry']
-#os = mood_list.index(mood)
+pos = mood_list.index(mood)
 
-image_path = f"images/profile_happy.png" 
+image_path = f"images/profile_{path[pos]}.png" 
 image  = Image.open(image_path)
 
 def nav_page(page_name, timeout_secs=3):
@@ -50,7 +50,7 @@ def image_to_base64(image):
 # Displaying the image on the left
 col1, col2, col3, col4, col5 = st.columns([2, 30, 30, 30, 32])
 with col1:
-    st.image(image, width =400)
+    st.image(image, width =300)
 
 # Displaying buttons on the right
 with col5:
@@ -107,3 +107,6 @@ def _inject_page_script(page_name, action_script, timeout_secs=3):
 
 hide_page("study")
 hide_page("test")
+hide_page("listen")
+hide_page("meditate")
+hide_page("journal")
