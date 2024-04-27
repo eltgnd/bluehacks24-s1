@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_image_select import image_select
 from PIL import Image
 
-global mood
 
 def main():
     st.title("Selet your mood for today!")
@@ -18,7 +17,7 @@ def main():
                                                    captions=["Happy", "Amused", "Inspired", "Don't Care",
                                                              "Annoyed", "Afraid", "Sad", "Angry"],
                                                     return_value="index")
-    mood = mood[int(str(selected_mood)[:100])]
+    st.session_state.mood = mood[int(str(selected_mood)[:100])]
 
 if __name__ == "__main__":
     main()

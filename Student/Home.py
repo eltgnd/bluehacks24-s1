@@ -13,7 +13,7 @@ global experience
 # Bypass log-in
 st.session_state["password_correct"] = True 
 st.session_state['name'] = 'Richell'
-st.session_state['student_id'] = 123456
+st.session_state['student_id'] = '123456'
 
 # Parameters for now, this will come from survey page:
 mood = 'Happy'

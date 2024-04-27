@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
 from streamlit_extras.add_vertical_space import add_vertical_space
+from streamlit_image_select import image_select
+from PIL import Image
 import datetime
 
 # On-call function
@@ -21,7 +23,8 @@ def update_data(survey_type):
         st.session_state.student_id,
         now,
         st.session_state.ga if survey_type=='g' else None,
-        st.session_state.ma if survey_type=='m' else None
+        st.session_state.ma if survey_type=='m' else None,
+        st.session_state.mood if survey_type=='d' else None
     ]
 
     conn.update(worksheet="Sheet1", data=df)
@@ -36,7 +39,6 @@ def check_streak():
     streaks = df.groupby('Streak_ID').cumcount() + 1
 
     return streaks.max()
-    
 
 
 # Title
@@ -52,11 +54,38 @@ with col1:
 
 # Choose survey
 with st.container(border=True):
-    options = ['Weekly Well-being', 'Monthly Check-up']
+    options = ['Daily Wellbeing','Weekly Wellbeing', 'Monthly Wellbeing']
     choice = st.radio('What do you want to answer?', options)
 
-# General Health Questionnaire
+# Daily
+st.session_state.mood_button = False
 if choice == options[0]:
+    with st.container(border=True):
+        st.write("🌱 Selet your mood for today by clicking on the corresponding image.")
+        mood_lst = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "Sad", "Angry"]
+
+        # Display mood images and get user input
+        selected_mood = image_select(label="", images=["images/8_happy.png", "images/7_amused.png", 
+                                                    "images/6_inspired.png", "images/5_dont_care.png",
+                                                    "images/4_annoyed.png", "images/3_afraid.png",
+                                                    "images/2_sad.png", "images/1_angry.png"], 
+                                                    use_container_width=False,
+                                                    captions=["Happy", "Amused", "Inspired", "Don't Care",
+                                                                "Annoyed", "Afraid", "Sad", "Angry"],
+                                                        return_value="index")
+        st.session_state.mood = mood_lst[int(str(selected_mood)[:100])]
+
+        button = st.button('Submit')
+        
+    if button:
+        st.session_state.mood_button = True
+    
+    if st.session_state.mood_button:
+        update_data('d')
+
+
+# General Health Questionnaire
+if choice == options[1]:
 
     if 'gq' not in st.session_state:
         st.session_state.gq = 0
@@ -90,8 +119,8 @@ if choice == options[0]:
 
     if st.session_state.gq > 11:
         st.write('Successfully submitted!')
-        update_data('g')
         st.session_state.submitted_g = True
+        update_data('g')
     else:
         with st.container(border=True):
             st.caption(f'Question {st.session_state.gq + 1} of 12')
@@ -103,7 +132,7 @@ if choice == options[0]:
             st.session_state.ga.append(ans)
 
 # Monthly Check-up
-if choice == options[1]:
+if choice == options[2]:
 
     if 'mq' not in st.session_state:
         st.session_state.mq = 0
@@ -138,8 +167,8 @@ if choice == options[1]:
 
     if st.session_state.gq > 12:
         st.write('Successfully submitted!')
-        update_data('m')
         st.session_state.submitted_m = True
+        update_data('m')
 
     else:
         with st.container(border=True):
