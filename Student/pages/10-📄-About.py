@@ -7,7 +7,7 @@ if __name__ == "__main__":
     emoji = ":page_facing_up:"
 
     st.set_page_config(
-        page_title = "(PAGE TITLE)",
+        page_title = "About",
         page_icon = emoji,
         initial_sidebar_state = "expanded",
     )
@@ -15,14 +15,23 @@ if __name__ == "__main__":
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} (PAGE TITLE)")
+    st.markdown("(PROJECT TITLE)")
+    st.title(f"{emoji} About")
 
-    # ---------
-    # Put page content here.
+    st.markdown("""The app was developed by...
 
+The following are our sources...
+
+                """)
     
+    st.markdown("---")
 
-    # ---------
+    st.markdown("""Contact Information
+    
+- Email: ...
+- GitHub: ...
+- LinkedIn: ...
+                
+    """)
     
     cf.display_copyright()
