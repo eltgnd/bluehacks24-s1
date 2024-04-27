@@ -6,11 +6,6 @@ from streamlit_image_select import image_select
 from PIL import Image
 import datetime
 
-# On-call function
-def update_gq(ans):
-    st.session_state.ga.append(ans)
-    st.session_state.gq += 1
-
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
 
