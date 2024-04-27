@@ -25,3 +25,5 @@ pip==24.0
 
 streamlit-extras
 streamlit-image-select
+st-pages
+st-gsheets-connection
