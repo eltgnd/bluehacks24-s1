@@ -1,15 +1,27 @@
 import streamlit as st
+import datetime
 
+# On-call function
 def update_gq(ans):
     st.session_state.ga.append(ans)
     st.session_state.gq += 1
 
-    st.write(st.session_state.gq)
+# Google Sheets Connection
+conn = st.connection("survey", type=GSheetsConnection)
 
-    if st.session_state.gq > 12:
-        st.session_state.gq = 0
+# Update Google sheets
+def update_data(survey_type, lst):
+    df = conn.read(worksheet='Sheet1', ttl=0)
+    now = datetime.datetime.now()
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
 
-# Welcome
+    to_add = pd.DataFrame({'Student ID': st.session_state})
+    df_updated = pd.concat([df, ])
+
+
+
+
+# Title
 name = st.session_state.name
 st.title(f'Hi {name.capitalize()}. 👋 Kumusta ka?')
 
@@ -21,8 +33,10 @@ with st.container(border=True):
 # General Health Questionnaire
 if choice == options[0]:
 
-    st.session_state.gq = 1
-    st.session_state.ga = []
+    if 'gq' not in st.session_state:
+        st.session_state.gq = 0
+    if 'ga' not in st.session_state:
+        st.session_state.ga = []
 
     questions = """I can concentrate regularly.
     I lose sleep over worrying.
@@ -42,13 +56,18 @@ if choice == options[0]:
     st.write('In a scale of 1 to 4, how well do you resonate with the following statements or questions?')
 
     # Place question
-    gq = st.session_state.gq
-    if gq == 0:
+    if st.session_state.gq > 11:
         st.write('Successfully submitted!')
+        st.write(st.session_state.ga)
     else:
-        st.caption(f'Question {gq} of 12')
-        ans = st.slider(question_lst[gq].strip(), 1,4,1,1)
-        submit = st.button('Submit', on_click=update_gq(ans))
+        st.caption(f'Question {st.session_state.gq} of 12')
+        ans = st.slider(question_lst[st.session_state.gq].strip(), 1,4,1,1, key=f'g{st.session_state.gq}')
+        submit = st.button('Submit')
+
+        if submit:
+            st.session_state.gq += 1
+            st.session_state.ga.append(ans)
+            update_data('g', st.session_state.ga)
 
     # for i in range(len(question_lst)):
     #     form = st.form(f'g{i}')
@@ -63,7 +82,11 @@ if choice == options[0]:
 
 # Monthly Check-up
 if choice == options[1]:
-    form2 = st.form('general_health')
+
+    if 'mq' not in st.session_state:
+        st.session_state.mq = 0
+    if 'ma' not in st.session_state:
+        st.session_state.ma = []
 
     questions = """Do you have the feeling that you don’t really care about what goes on around you?
     Has it happened in the past that you were surprised by the behaviour of people whom you thought you knew well?
@@ -79,14 +102,20 @@ if choice == options[1]:
     How often do you have the feeling that there's little meaning in the things you doin your daily life?
     How often do you have the feeling that you’re not sure you can keep under control?"""
 
+    question_lst = questions.split('\n')
+
     st.write('In a scale of 1 to 7, how well do you resonate with the following statements or questions?')
-    for i in questions.split('\n'):
-        form2.slider(i.strip(), 1,7,1,1)
-    form2.form_submit_button("Submit")
 
+    # Place question
+    if st.session_state.gq > 12:
+        st.write('Successfully submitted!')
 
-# View data
-# conn = st.connection("survey", type=GSheetsConnection)
+    else:
+        st.caption(f'Question {st.session_state.mq} of 13')
+        ans = st.slider(question_lst[st.session_state.mq].strip(), 1,7,1,1, key=f'g{st.session_state.mq}')
+        submit = st.button('Submit')
 
-# df = conn.read(worksheet = "Sheet1", ttl=0)
-
+        if submit:
+            st.session_state.mq += 1
+            st.session_state.ma.append(ans)
+            update_data('m', st.session_state.ma)

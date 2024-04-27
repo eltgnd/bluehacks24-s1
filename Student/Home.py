@@ -34,9 +34,6 @@ def check_password():
     def password_entered():
         sql = 'SELECT * FROM Sheet1;'
         df = conn.query(sql=sql, ttl=0) 
-
-        st.write(df)
-
         match = (df['user_id'].eq(st.session_state.student_id) & df['password'].eq(st.session_state.password)).any()
         if match:
             st.session_state["password_correct"] = True  
