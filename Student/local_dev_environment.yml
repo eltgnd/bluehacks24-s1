@@ -34,10 +34,14 @@ dependencies:
   - pillow=10.0 # conda. for displaying images.
   - beautifulsoup4=4.12
   - pip=24.0 # conda. needed to install packages that only work when pip-installed.
+
   
   # # The lines below are for packages to be pip-installed. Leave these COMMENTED if you won't use them.
   # # The `- pip:` line must be uncommented if you want to use these lines.
 
-  # - pip:
+  - pip:
     # - streamlit==1.33.0 # pip. If the streamlit line above doesn't work, or `streamlit run app.py` doesn't work in anaconda prompt (windows) or terminal (mac), use this one.
     # - pywin32==300 # pip. for VS Code Python Interactive kernel to work. Only for Windows users. Not strictly necessary.
+    - st-gsheets-connection
+    - streamlit-extras 
+    - st-pages
