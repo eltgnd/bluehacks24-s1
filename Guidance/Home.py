@@ -1,49 +1,121 @@
-"""
-File description
-"""
-
 import streamlit as st
-import pandas as pd
-import numpy as np
+from streamlit_extras.add_vertical_space import add_vertical_space
+from streamlit_gsheets import GSheetsConnection
+from st_pages import Page, Section,show_pages, add_page_title
+from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_image_select import image_select
+import control_flow as cf
+import datetime
 from PIL import Image
 
-# Custom functions
-import control_flow as cf
+st.set_page_config(page_title='Bughaw Counsellors\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-if __name__ == "__main__":
+# Bypass log-in
+st.session_state["password_correct"] = True 
+st.session_state['name'] = 'Mark'
+st.session_state['counsellor_id'] = 'g001'
 
-    emoji = ":mag:"
+# Google Sheets Connection
+conn = st.connection("user", type=GSheetsConnection)
 
-    page_title = "PAGE TITLE"
+# Initialize
+cf.load_initial_data_if_needed(force = True)
+placeholder = st.empty()
 
-    st.set_page_config(
-        page_title = page_title,
-        page_icon = emoji,
-        initial_sidebar_state = "expanded",
-    )
+# Title
+# st.image(logo_imglink, width=100)
+add_vertical_space(1)
+st.caption('BUGHAW   |   GUIDANCE COUNSELLORS\' PORTAL')
 
-    # Show logo and title
-    logo_and_title_cols = st.columns([1, 6])
+add_vertical_space(1)
+st.markdown(f"""
+    <div style="line-height:450%;">
+        <span style=" font-size:80px ; color:#023E8A ; font-weight:bold; ">From blue </span>
+        <span style=" font-size:80px ; color:#31333F ; font-weight:bold; ">to hue</span>
+        <span style=" font-size:80px ; color:#31333F ; font-weight:bold; ">.</span>
+    </div>""",
+    unsafe_allow_html=True
+)
 
-    with logo_and_title_cols[0]:
-        # Load logo image
-        logo = Image.open("images/logo.png")
-        st.image(
-            image = logo,
-            width = 90,
-            output_format = "JPEG"
-        )
-    with logo_and_title_cols[1]:
-        st.title(page_title)
+# User Authentication
+def check_password():
 
-    # Force-load initial data.
-    # We should use force = False in other pages.
-    cf.load_initial_data_if_needed(force = True)
+    # Sample
+    placeholder.write('Try this sample counsellor ID: g001, password: hello456')
 
-    st.markdown("""Welcome!
+    # Log-in
+    def log_in():
+        with st.form('Credentials'):
+            st.text_input("Enter your counsellor ID", type='default', key='counsellor_id')
+            st.text_input("Enter your password", type="password", key="password")
+            st.form_submit_button("Log-in", on_click=password_entered)
+ 
+    def password_entered():
+        sql = 'SELECT * FROM Sheet1;'
+        df = conn.query(sql=sql, ttl=0) 
+        match = (df['user_id'].eq(st.session_state.counsellor_id) & df['password'].eq(st.session_state.password)).any()
+        if match:
+            st.session_state["password_correct"] = True  
+            st.session_state['name'] = df[df.user_id == st.session_state.counsellor_id].reset_index().at[0,'nickname']
+        else:
+            st.session_state["password_correct"] = False
 
-(App description)
+    if st.session_state.get("password_correct", False):
+        return True
 
-""")
-    
-    cf.display_copyright()
+    log_in()
+    if "password_correct" in st.session_state:
+        st.error("😕 User not known or password incorrect")
+    return False
+
+if not check_password():
+    st.stop()
+
+# Start
+placeholder.empty()
+
+# Information about the app
+st.write('Welcome to Bughaw Counsellors\' Portal. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+col1, col2 = st.columns(2)
+with col1:
+    with st.expander(label='WHAT IS BUGHAW', expanded=False):
+        st.write('Lorem ipsum')
+with col2:
+    with st.expander(label='WHY BUGHAW'):
+        section_text = ''
+        st.markdown(f"**:blue[Ratio something something.]**\n\n{section_text}")
+
+# About Bughaw
+st.header('Get to know your Bughaw!')
+
+# Impact
+st.caption('IMPACT BY NUMBERS')
+col1, col2, col3 = st.columns(3)
+row1= [col1, col2, col3]
+homepage_impact = {
+    0 : ['Active Students', '2748 🧑‍🎓', 1406],
+    1 : ['Successful Consultations', '376 🫂', 8],
+    2 : ['Mental Health Volunteers', '49 💙', 16]
+
+}
+for ind, col in enumerate(row1):
+    col.metric(label=homepage_impact[ind][0], value=homepage_impact[ind][1], delta=homepage_impact[ind][2])
+
+style_metric_cards(border_left_color='#023E8A', border_radius_px=7, box_shadow=False)
+
+st.divider()
+
+# Features Overview
+option = st.radio('Get to know Bughaw\'s features!', ['Appointment Calendar', 'Student Dashboard', 'Database Page', 'Group Chat System', 'Profile Tab'])
+descriptions = {
+'Appointment Calendar':"",
+'Student Dashboard':"",
+'Database Page':"",
+'Group Chat System':"",
+'Profile Tab':"The Profile Tab is a repository of your personal information that also allows you to track your own mental health journey through a series of easily comprehensible statistical analysis of your past survey responses."
+}
+
+with st.container(border=True):
+    st.subheader(option)
+    st.write(descriptions[option])

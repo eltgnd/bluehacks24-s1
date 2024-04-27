@@ -9,10 +9,6 @@ import control_flow as cf
 import datetime
 from PIL import Image
 
-global name
-global mood
-global experience
-
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # Bypass log-in
@@ -21,7 +17,7 @@ st.session_state['name'] = 'Richell'
 st.session_state['student_id'] = 's222869'
 
 # Google Sheets Connection
-conn = st.connection("survey", type=GSheetsConnection)
+conn = st.connection("user", type=GSheetsConnection)
 
 # Update Google sheets
 def update_data(survey_type):
@@ -67,7 +63,7 @@ st.markdown(f"""
 def check_password():
 
     # Sample
-    placeholder.write('Try this sample student ID: 222390, password: 123456')
+    placeholder.write('Try this sample student ID: s222869, password: hello876')
 
     # Log-in
     def log_in():
