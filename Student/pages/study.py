@@ -3,7 +3,7 @@ import streamlit as st
 st.title("Release the tension...")
 
 # Define the options
-options = ["Annoyance", "Fear", "Sadness", "Anger", "Stress"]
+options = ["-", "Annoyance", "Fear", "Sadness", "Anger", "Stress"]
 
 # Create a dropdown menu
 selected_option = st.selectbox('What do you want to reduce?',options)
@@ -14,7 +14,7 @@ if selected_option == 'Annoyance':
         image = st.image("images/A1.png", width=150)
     with col2:
         st.markdown("""
-        <h2>Practice Empathy:</h2>
+        <h2>Practice Empathy</h2>
         
         Try to understand the perspective of the person or situation causing annoyance. 
         Putting yourself in their shoes can help you see things from a different angle 
@@ -75,4 +75,249 @@ Take a moment to reflect on the positive aspects of your life and express gratit
         """, unsafe_allow_html=True)
 
 elif selected_option == 'Fear':
-    pass
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B1.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Deep Breathing</h2>
+        
+        Take slow, deep breaths to calm your body and mind. Inhale deeply through your nose, hold for a few seconds, and then exhale slowly through your mouth.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B2.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Positive Affirmations</h2>
+        Use positive self-talk to counteract fearful thoughts. Repeat affirmations such as "I am strong," "I am capable," or "I can handle this" to boost your confidence.""", unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B3.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Positive Affirmations</h2>
+       Imagine yourself successfully overcoming the source of your fear. Visualize a positive outcome and focus on how it would feel to conquer your fears.
+    
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B4.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Break It Down</h2>
+    Break the situation or task that triggers fear into smaller, more manageable steps. Focus on tackling one step at a time, gradually building momentum and confidence.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B5.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Seek Support</h2>
+        Reach out to friends, family, or a trusted mentor for encouragement and reassurance. Sharing your fears with someone supportive can provide comfort and perspective.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/B6.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Take Action</h2>
+        Face your fears head-on by taking proactive steps to confront them. Each small action you take toward overcoming your fears will help build courage and resilience over time.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+
+elif selected_option == 'Sadness':
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C1.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Engage in Physical Activity</h2>
+        Get moving by going for a walk, doing some yoga, or even dancing to your favorite music. Physical activity releases endorphins, which are natural mood lifters.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C2.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Get Adequate Sleep</h2>
+        Make sure you're getting enough restful sleep each night. Aim for 7-9 hours of quality sleep to help improve your mood and overall well-being.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C3.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Practice Gratitude</h2>
+        Take a few moments each day to write down or think about things you're grateful for. Focusing on the positive aspects of your life can help shift your perspective and reduce feelings of sadness.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C4.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Connect with Loved Ones</h2>
+        Reach out to friends or family members for support. Talking to someone you trust about how you're feeling can provide comfort and reassurance.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C5.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Limit Media Consumption</h2>
+        Reduce exposure to negative news or social media if it's contributing to your sadness. Instead, try engaging in activities that uplift and inspire you.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/C6.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Seek Professional Help</h2>
+        If sadness persists or interferes with your daily life, consider talking to a therapist or counselor. They can provide guidance, support, and strategies to help you cope with and overcome your feelings of sadness.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+
+elif selected_option == 'Anger':
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D1.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Breathe</h2>
+        Finding a quiet spot and focus on your breathing.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D2.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Find Alignment</h2>
+        Stand with your feet a short distance apart from each other. Make sure they line up with your hips and to bend your knees slightlight. Dig your feet and toes into it.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D3.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Ground Yourself</h2>
+        Pull your shoulders back and take several slow breaths. With your hands, knead the skin on your arms, neck, and shoulders. Pay attention to the sensations of your body.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D4.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Visualize What Made You Angry</h2>
+        Think about the incident that triggered your anger. Picture out all the details until you feel your anger rise.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D5.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Check for Feelings Other Than Anger</h2>
+        It’s helpful to name your feelings out loud, one at a time. This can be “I am hurt,” “I feel embarrassed,” “I am heartbroken,” “I feel anxious,” “I am scared,” or “I am ambivalent.”
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/D6.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Journal Your Experience</h2>
+        Write down your experience. You may start with “It’s safe to be present in my body. It’s safe to feel my feelings.” Explore your emotions as you write these.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+    
+elif selected_option == 'Stress':
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E1.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Mindfulness Meditation</h2>
+        Focus on your breath. Acknowledge and accept the thoughts that pass through your mind.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E2.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Music Meditation</h2>
+        Pay attention to the sounds and rhythms of different music pieces. 
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E3.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Body Scan Meditation</h2>
+        Slowly direct your attention to different parts of your body, from your toes to your head.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E4.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Mantra Meditation</h2>
+        Silently repeat a calming word or phrase (a “mantra”) to yourself to prevent distracting thoughts.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E5.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Walking Meditation</h2>
+        Try to walk or move around for a few minutes.
+        """, unsafe_allow_html=True)
+    st.write('\n')
+
+    col1, col2 = st.columns([1,3])
+    with col1:
+        image = st.image("images/E6.png", width=150)
+    with col2:
+        st.markdown("""
+        <h2>Loving-Kindness Meditation</h2>
+        Send goodwill, kindness, and warmth towards yourself and/or others by silently repeating a series of compassionate phrases. Such as “May you be happy. May you be healthy. May you be at peace.”
+        """, unsafe_allow_html=True)
+    st.write('\n')

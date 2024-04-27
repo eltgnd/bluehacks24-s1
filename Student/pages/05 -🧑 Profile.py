@@ -30,7 +30,7 @@ with st.expander('Daily Mood'):
             'Angry': mpimg.imread('images/1_angry.png')
         }
 
-        fig, ax = plt.subplots(figsize=(10, 10))
+        fig, ax = plt.subplots(figsize=(10, 4))
         ax.axis('off')
 
         rectangle = plt.Rectangle((0, 0), 10, 10, fill=False, edgecolor='white')
