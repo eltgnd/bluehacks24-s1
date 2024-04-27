@@ -1,0 +1,8 @@
+/.vscode/
+/__pycache__/
+/.streamlit/secrets.toml
+/private/
+private_*.py
+*.bat
+*.command
+.DS_Store
