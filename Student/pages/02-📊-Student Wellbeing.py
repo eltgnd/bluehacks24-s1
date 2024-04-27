@@ -76,7 +76,7 @@ if choice == options[0]:
         st.session_state.mood = mood_lst[int(str(selected_mood)[:100])]
 
         button = st.button('Submit')
-        
+
     if button:
         st.session_state.mood_button = True
     
@@ -114,9 +114,6 @@ if choice == options[1]:
 
     # Place question
     options = [str(i) for i in range(1,5)]
-    options[0] += ' (Least)'
-    options[-1] += ' (Most)'
-
     if st.session_state.gq > 11:
         st.write('Successfully submitted!')
         st.session_state.submitted_g = True
@@ -129,7 +126,7 @@ if choice == options[1]:
 
         if submit:
             st.session_state.gq += 1
-            st.session_state.ga.append(ans)
+            st.session_state.ga.append(int(ans))
 
 # Monthly Check-up
 if choice == options[2]:
@@ -162,9 +159,6 @@ if choice == options[2]:
 
     # Place question
     options = [str(i) for i in range(1,8)]
-    options[0] += ' (Least)'
-    options[-1] += ' (Most)'
-
     if st.session_state.gq > 12:
         st.write('Successfully submitted!')
         st.session_state.submitted_m = True
@@ -177,4 +171,4 @@ if choice == options[2]:
             submit = st.button('Submit')
         if submit:
             st.session_state.mq += 1
-            st.session_state.ma.append(ans)
+            st.session_state.ma.append(int(ans))
