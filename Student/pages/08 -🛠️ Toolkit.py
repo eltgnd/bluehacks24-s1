@@ -58,8 +58,8 @@ with col5:
         nav_page("study")
     if st.button('Meditate'):
         nav_page("meditate")
-    if st.button('Listen'):
-        nav_page("listen")
+    if st.button('Read'):
+        nav_page("read")
     if st.button('Journal'):
         nav_page("journal")
 

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from streamlit_gsheets import GSheetsConnection
 from PIL import Image
+import pandas as pd
 
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
@@ -12,6 +13,20 @@ conn = st.connection("survey", type=GSheetsConnection)
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
 st.write(f'Student ID: {st.session_state.student_id}')
+
+def check_streak():
+    sql = f"""SELECT Date FROM Sheet1 WHERE "Student ID"='{st.session_state.student_id}' ORDER BY Date;"""
+    df = conn.query(sql=sql)
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date_Diff'] = df['Date'].diff().dt.days
+    df['Streak_ID'] = (df['Date_Diff'] > 1).cumsum()
+    streaks = df.groupby('Streak_ID').cumcount() + 1
+
+    return streaks.max()
+col1, col2, col3 = st.columns(3)
+with col1:
+    with st.container(border=True):
+        st.metric('Answer Streak', f'{check_streak()} days', delta='Nice work!')
 
 # Daily Survey
 with st.expander('Daily Mood'):

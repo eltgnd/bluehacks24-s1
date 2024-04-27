@@ -44,10 +44,10 @@ st.title(f'Hi {name.capitalize()}, kumusta ka? 👋')
 st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
 
 # Show streak
-col1, col2, col3 = st.columns(3)
-with col1:
-    with st.container(border=True):
-        st.metric('Answer Streak', f'{check_streak()} days', delta='Nice work!')
+# col1, col2, col3 = st.columns(3)
+# with col1:
+#     with st.container(border=True):
+#         st.metric('Answer Streak', f'{check_streak()} days', delta='Nice work!')
 
 # Choose survey
 with st.container(border=True):
