@@ -5,15 +5,8 @@ import matplotlib.image as mpimg
 from streamlit_gsheets import GSheetsConnection
 from PIL import Image
 
-# global experience
-
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
-
-# Parameters for now, this will come from survey page:
-mood = 'Happy'
-name = 'Osen'
-experience = 999
 
 # Title
 st.title(f'Welcome {st.session_state.name}! 👋')
@@ -114,6 +107,3 @@ with st.expander('Monthly Wellbeing'):
         fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
 
         st.plotly_chart(fig, use_container_width=True)
-
-
-
