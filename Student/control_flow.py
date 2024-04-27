@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import json
-from collections import OrderedDict
 
 # This is cached. The `max_entries` here is only 1 because the initial data and initial contents of session state are supposed to be the same for ALL users.
 @st.cache_data(max_entries = 1)
@@ -33,8 +31,7 @@ def get_initial_data():
     initial_data = {
         "COLOR_HEXES": color_hexes,
 
-        # If we need to use an ordered dictionary, please use the ff. class.
-        "my_ordered_dict": OrderedDict(),
+        
     }
 
     return initial_data

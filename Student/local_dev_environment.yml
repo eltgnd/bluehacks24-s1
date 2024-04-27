@@ -46,3 +46,5 @@ dependencies:
     - streamlit-extras 
     - st-pages
     - streamlit-image-select
+    - pytube
+    - art

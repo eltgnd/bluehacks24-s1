@@ -18,7 +18,7 @@ if __name__ == "__main__":
     emoji = ":speech_balloon:"
 
     st.set_page_config(
-        page_title = "Counselor Chat",
+        page_title = "Support Group Chat",
         page_icon = emoji,
         initial_sidebar_state = "expanded",
     )
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     cf.load_initial_data_if_needed()
 
     st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} Counselor Chat")
+    st.title(f"{emoji} Support Group Chat")
 
     conn = groupchat_connect_to_user_database(user_id = st.session_state["student_id"])
 
@@ -49,11 +49,7 @@ if __name__ == "__main__":
     
     assigned_counselor = info["assigned_counselor"]
     groupchat_id = info["groupchat_id"]
-
-    st.markdown("### Counselor Chat")
-    # Instead of using the student's groupchat, use the private chat between the student and the counselor.
-    groupchat_id = f"PRIVATE_{user_id}_{assigned_counselor}"
-    keyword = "counselor"
+    keyword = "support"
 
     # Preparations to display messages
 
@@ -94,7 +90,7 @@ if __name__ == "__main__":
                 objs = [existing_df_full, new_row_df],
                 axis = 0,
                 ignore_index = True
-            ).sort_values("time", ascending = True)
+            )
 
         submitted_just_before_last_refresh = submitted
     
@@ -125,8 +121,9 @@ if __name__ == "__main__":
 
                 if display_messages.shape[0] == 0:
                     st.info("There are no messages in this chat yet.")
-        
+
                 else:
+        
                     # Display messages
                     for index, row in display_messages.iterrows():
                         msg_time = row["time"].split(" ")[1][:8]
