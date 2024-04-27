@@ -76,21 +76,21 @@ def profile_sidebar():
 
     background_image = Image.open("images/background.png")
     if mood == 'Happy':
-        cat_image = Image.open("images/cat_happy.png")
+        mood_image = Image.open("images/8_happy.png")
     elif mood == 'Amused':
-        cat_image = Image.open("images/cat_amused.png")
+        mood_image = Image.open("images/7_amused.png")
     elif mood == 'Inspired':
-        cat_image = Image.open("images/ccat_inspired.png")
+        mood_image = Image.open("images/6_inspired.png")
     elif mood == 'Dont Care':
-        cat_image = Image.open("images/ccat_dont_care.png")
+        mood_image = Image.open("images/5_dont_care.png")
     elif mood == 'Annoyed':
-        cat_image = Image.open("images/ccat_annoyed.png")
+        mood_image = Image.open("images/4_annoyed.png")
     elif mood == 'Afraid':
-        cat_image = Image.open("images/ccat_afraid.png")
+        mood_image = Image.open("images/3_afraid.png")
     elif mood == 'Sad':
-        cat_image = Image.open("images/ccat_sad.png")
+        mood_image = Image.open("images/2_sad.png")
     elif mood == 'Angry':
-        cat_image = Image.open("images/ccat_angry.png")
+        mood_image = Image.open("images/1_angry.png")
 
 
     # Calculate level and remaining experience
@@ -106,7 +106,7 @@ def profile_sidebar():
         f"""
         <div style="position:relative;">
             <img src="data:image/png;base64,{image_to_base64(background_image)}" style="width:100%;">
-            <img src="data:image/png;base64,{image_to_base64(cat_image)}" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:75%">
+            <img src="data:image/png;base64,{image_to_base64(mood_image)}" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:75%">
         </div>
         """,
         unsafe_allow_html=True
