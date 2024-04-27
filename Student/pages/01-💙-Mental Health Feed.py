@@ -212,7 +212,7 @@ def get_articles(switch):
 
 if __name__ == "__main__":
 
-    emoji = ":newspaper:"
+    emoji = "💙"
 
     st.set_page_config(
         page_title = "Mental Health Feed",
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
+    st.caption('BUGHAW   |   STUDENTS\' PORTAL')
     st.title(f"{emoji} Mental Health Feed")
 
     if "get_articles_switch_param" not in st.session_state:
@@ -231,37 +231,34 @@ if __name__ == "__main__":
 
     articles_df = get_articles(switch = st.session_state["get_articles_switch_param"])
 
-    refresh_cols = st.columns([0.7, 0.3])
+    st.write('The Mental Health Feed displays collated articles from various websites that specifically address and provide tips about mental health, such as but not limited to HelpGuide.org and Science Daily')
 
-    with refresh_cols[1]:
-        if st.button(":arrows_counterclockwise: Refresh feed"):
-            st.session_state["get_articles_switch_param"] = -1 * st.session_state["get_articles_switch_param"]
+    if st.button(":arrows_counterclockwise: Refresh feed"):
+        st.session_state["get_articles_switch_param"] = -1 * st.session_state["get_articles_switch_param"]
 
     num_articles_to_show = 20
 
     for index, row in articles_df.loc[0 : num_articles_to_show + 1].iterrows():
+        with st.container(border=True):
+            cols = st.columns([0.6,0.4])
+            with cols[0]:
 
-        cols = st.columns([0.6,0.4])
-        with cols[0]:
+                st.caption(f'{row["elapsed_time_str"]} 🕑')
 
-            st.caption(row["elapsed_time_str"])
+                st.html("""<style> a {color: black; text-decoration: none;}</style>""")
 
-            st.html("""<style> a {color: black; text-decoration: none;}</style>""")
-
-            st.html(
-                """<h4><a href = "{0}" style = "color: black; text-decoration: none;">{1}</a></h4>
-                
-<a href = "{2}" style = "color: black; text-decoration: none;">{3}</a>""".format(
-                    row['url'],
-                    row['title'],
-                    row['feed_site'],
-                    row['src']
+                st.html(
+                    """<h4><a href = "{0}" style = "color: black; text-decoration: none;">{1}</a></h4>
+                    
+    <a href = "{2}" style = "color: #023E8A; text-decoration: none;">🌐 {3}</a>""".format(
+                        row['url'],
+                        row['title'],
+                        row['feed_site'],
+                        row['src']
+                    )
                 )
-            )
-            
-        with cols[1]:
-            st.markdown(row["description"])
-
-        st.divider()
+                
+            with cols[1]:
+                st.markdown(row["description"])
     
     cf.display_copyright()

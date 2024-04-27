@@ -23,17 +23,17 @@ if __name__ == "__main__":
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
-    st.title(f"{emoji} Book an Appointment")
+    st.caption('BUGHAW   |   STUDENTS\' PORTAL')
+
+    st.title(f"{emoji} Book Appointment")
 
     # ---------
 
+    st.write('We’re so glad you’ve taken this important step by booking an appointment with your counselor. Your well-being matters, and we’re here to listen, support, and guide you. **Follow the steps below to begin.**')
+    st.divider()
+
     # Instructions for booking
     st.markdown("""
-    ## Instructions
-    
-    
-    To set an appointment with your guidance counselor,
     1. **Check their availability below.**
     """)
 
@@ -63,8 +63,8 @@ if __name__ == "__main__":
     """)
 
     # Display form
-    st.markdown("## Appointment Form")
-    components.iframe(form, scrolling=True, height=500)
+    with st.container(border=True):
+        components.iframe(form, scrolling=True, height=500)
     
     ## Add functionality na may prompt sa baba after they are done submitting the form
 

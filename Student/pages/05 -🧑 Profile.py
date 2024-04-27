@@ -9,6 +9,7 @@ from PIL import Image
 conn = st.connection("survey", type=GSheetsConnection)
 
 # Title
+st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
 st.write(f'Student ID: {st.session_state.student_id}')
 
