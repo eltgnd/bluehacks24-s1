@@ -136,8 +136,7 @@ show_pages(
         Page('menu_pages/appointment.py', 'Set an Appointment', '📄'),
         Page('menu_pages/support.py', 'Chat with Support Group', '🫂'),
         Page('menu_pages/counselor.py', 'Chat with Counselor', '💬'),
-        Page('menu_pages/support.py', 'About', '💡'),
-        
+        Page('menu_pages/about.py', 'About', '💡'),
     ]
 
 )
