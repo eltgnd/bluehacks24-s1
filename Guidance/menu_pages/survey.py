@@ -16,7 +16,8 @@ conn = st.connection("survey", type=GSheetsConnection)
 st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
 st.markdown("""
-    View descriptive analytics from student-provided data.
+    View descriptive analytics from student-provided data.        
+    Choose a question and *then* choose a descriptive statistic.
 """)
 
 # Weekly Survey
@@ -36,9 +37,8 @@ I feel reasonably happy."""
 question_lst = questions.split('\n')
 
 with st.expander('Weekly Wellbeing'):
-    sql = f"""SELECT "General Survey",Date FROM Sheet1;"""
-    df = conn.query(sql=sql, ttl=0)
-
+    sql = f"""SELECT "General Survey", Date FROM Sheet1;"""
+    df = conn.query(sql=sql, ttl=0).dropna(how='any')
     for i in range(12):
         df[i] = df['General Survey'].str[1:-1].str.split(',').str[i]
         df[i] = df[i].apply(turn_int)
@@ -53,18 +53,33 @@ with st.expander('Weekly Wellbeing'):
     weekly_mean = weekly.mean()
     weekly_median = weekly.median()
     weekly_std = weekly.std()
-    func_lst = [weekly_mean, weekly_median, weekly_std]
+    func_lst = ['mean', 'median', 'stdev']
 
-    option = st.selectbox('', question_lst, index=None)
-    if option:
-        ind = question_lst.index(option)
-        # mean pa lang to
-        weekly_mean = weekly_mean.reset_index()
-        filtered_df = weekly_mean[['Date', ind]]
-        fig = px.line(filtered_df, x='Date', y=ind, title='')
-        fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
-        fig.update_xaxes(tickvals=filtered_df['Date'])
-        st.plotly_chart(fig, use_container_width=True)
+    option_weekly = st.selectbox('', question_lst, index=None, placeholder='Choose a question', key="option_weekly")
+    descriptive_stat_weekly = st.radio('Choose a descriptive statistic', func_lst, index=None, key="descriptive_stat_weekly")
+    to_plot_weekly = None
+
+    if option_weekly is not None:
+        question_ind = question_lst.index(option_weekly)
+
+        if descriptive_stat_weekly == 'mean':
+            to_plot_weekly = weekly_mean
+        elif descriptive_stat_weekly == 'median':
+            to_plot_weekly = weekly_median
+        elif descriptive_stat_weekly == 'stdev':
+            to_plot_weekly = weekly_std
+        
+        if to_plot_weekly is not None:
+            to_plot_weekly = to_plot_weekly.reset_index()
+            filtered_df = to_plot_weekly[['Date', question_ind]]
+            fig = px.line(filtered_df, x='Date', y=question_ind, title=descriptive_stat_weekly,)
+            fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
+            fig.update_xaxes(tickvals=filtered_df['Date'])
+            fig.update_layout(
+                yaxis_title="Response Value",
+                title=f'Question {question_ind}: {descriptive_stat_weekly} weekly response values'
+            )
+            st.plotly_chart(fig, use_container_width=True)
 
 # Monthly Survey
 questions = """Do you have the feeling that you don’t really care about what goes on around you?
@@ -84,8 +99,8 @@ How often do you have the feeling that you’re not sure you can keep under cont
 question_lst = questions.split('\n')
 
 with st.expander('Monthly Wellbeing'):
-    sql = f"""SELECT "Monthly Survey",Date FROM Sheet1 ORDER BY Date;"""
-    df = conn.query(sql=sql, ttl=0)
+    sql = f"""SELECT "Monthly Survey", Date FROM Sheet1 ORDER BY Date;"""
+    df = conn.query(sql=sql, ttl=0).dropna(how='any')
 
     for i in range(12):
         df[i] = df['Monthly Survey'].str[1:-1].str.split(',').str[i]
@@ -101,15 +116,30 @@ with st.expander('Monthly Wellbeing'):
     monthly_mean = monthly.mean()
     monthly_median = monthly.median()
     monthly_std = monthly.std()
-    func_lst = [monthly_mean, monthly_median, monthly_std]
+    func_lst = ['mean', 'median', 'stdev']
 
-    option = st.selectbox('', question_lst, index=None)
-    if option:
-        ind = question_lst.index(option)
-        # mean pa lang to
-        monthly_mean = monthly_mean.reset_index()
-        filtered_df = monthly_mean[['Date', ind]]
-        fig = px.line(filtered_df, x='Date', y=ind, title='')
-        fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
-        fig.update_xaxes(tickvals=filtered_df['Date'])
-        st.plotly_chart(fig, use_container_width=True)
+    option_monthly = st.selectbox('', question_lst, index=None, placeholder='Choose a question', key='option_monthly')
+    descriptive_stat_monthly = st.radio('Choose a descriptive statistic', func_lst, index=None, key="descriptive_stat_monthly")
+    to_plot_monthly = None
+
+    if option_monthly is not None:
+        question_ind = question_lst.index(option_monthly)
+
+        if descriptive_stat_monthly == 'mean':
+            to_plot_monthly = monthly_mean
+        elif descriptive_stat_monthly == 'median':
+            to_plot_monthly = monthly_median
+        elif descriptive_stat_monthly == 'stdev':
+            to_plot_monthly = monthly_std
+        
+        if to_plot_monthly is not None:
+            to_plot_monthly = to_plot_monthly.reset_index()
+            filtered_df = to_plot_monthly[['Date', question_ind]]
+            fig = px.line(filtered_df, x='Date', y=question_ind, title=descriptive_stat_monthly)
+            fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
+            fig.update_xaxes(tickvals=filtered_df['Date'])
+            fig.update_layout(
+                yaxis_title="Response Value",
+                title=f'Question {question_ind}: {descriptive_stat_monthly} monthly response values'
+            )
+            st.plotly_chart(fig, use_container_width=True)
