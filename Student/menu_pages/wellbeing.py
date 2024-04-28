@@ -68,10 +68,10 @@ if choice == options[0]:
         mood_lst = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "Sad", "Angry"]
 
         # Display mood images and get user input
-        selected_mood = image_select(label="", images=["images/8_happy.png", "images/7_amused.png", 
-                                                    "images/6_inspired.png", "images/5_dont_care.png",
-                                                    "images/4_annoyed.png", "images/3_afraid.png",
-                                                    "images/2_sad.png", "images/1_angry.png"], 
+        selected_mood = image_select(label="", images=["Student/images/8_happy.png", "Student/images/7_amused.png", 
+                                                    "Student/images/6_inspired.png", "Student/images/5_dont_care.png",
+                                                    "Student/images/4_annoyed.png", "Student/images/3_afraid.png",
+                                                    "Student/images/2_sad.png", "Student/images/1_angry.png"], 
                                                     use_container_width=False,
                                                     captions=["Happy", "Amused", "Inspired", "Don't Care",
                                                                 "Annoyed", "Afraid", "Sad", "Angry"],

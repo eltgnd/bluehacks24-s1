@@ -20,7 +20,7 @@ mood_list = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "
 path = ['happy', 'amused', 'inspired', 'dont_care', 'annoyed', 'afraid', 'sad', 'angry']
 pos = mood_list.index(mood)
 
-image_path = f"images/profile_{path[pos]}.png" 
+image_path = f"Student/images/profile_{path[pos]}.png" 
 image  = Image.open(image_path)
 
 def nav_page(page_name, timeout_secs=3):

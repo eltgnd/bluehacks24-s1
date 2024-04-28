@@ -20,7 +20,7 @@ cf.load_initial_data_if_needed(force = True)
 placeholder = st.empty()
 
 # Title
-st.image('images/BUGHAW.png', width=150)
+st.image('Guidance/images/BUGHAW.png', width=150)
 add_vertical_space(1)
 st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 
@@ -88,12 +88,12 @@ st.markdown(f"""
 # Welcome
 show_pages(
     [
-        Page('Home.py', 'Homepage', '👤'),
-        Page('menu_pages/appointments.py', 'Manage Appointments', '📋'),
-        Page('menu_pages/private.py', 'Private Chat', '💬'),
-        Page('menu_pages/support.py', 'Support Group Chat', '🫂'),
-        Page('menu_pages/survey.py', 'Data Analytics', '📊'),
-        Page('menu_pages/about.py', 'About', '💡'),
+        Page('Guidance/Home.py', 'Homepage', '👤'),
+        Page('Guidance/menu_pages/appointments.py', 'Manage Appointments', '📋'),
+        Page('Guidance/menu_pages/private.py', 'Private Chat', '💬'),
+        Page('Guidance/menu_pages/support.py', 'Support Group Chat', '🫂'),
+        Page('Guidance/menu_pages/survey.py', 'Data Analytics', '📊'),
+        Page('Guidance/menu_pages/about.py', 'About', '💡'),
     ]
 )
 

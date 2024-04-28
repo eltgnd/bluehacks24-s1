@@ -37,7 +37,7 @@ def update_data(survey_type):
 cf.load_initial_data_if_needed(force = True)
 
 # Title
-st.image('images/BUGHAW.png', width=150)
+st.image('Student/images/BUGHAW.png', width=150)
 add_vertical_space(1)
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 
@@ -108,10 +108,10 @@ with st.expander(label=f'📅 How are you today, {st.session_state.name}?'):
     mood_lst = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "Sad", "Angry"]
 
     # Display mood images and get user input
-    selected_mood = image_select(label="", images=["images/8_happy.png", "images/7_amused.png", 
-                                                "images/6_inspired.png", "images/5_dont_care.png",
-                                                "images/4_annoyed.png", "images/3_afraid.png",
-                                                "images/2_sad.png", "images/1_angry.png"], 
+    selected_mood = image_select(label="", images=["Student/images/8_happy.png", "Student/images/7_amused.png", 
+                                                "Student/images/6_inspired.png", "Student/images/5_dont_care.png",
+                                                "Student/images/4_annoyed.png", "Student/images/3_afraid.png",
+                                                "Student/images/2_sad.png", "Student/images/1_angry.png"], 
                                                 use_container_width=False,
                                                 captions=["Happy", "Amused", "Inspired", "Don't Care",
                                                             "Annoyed", "Afraid", "Sad", "Angry"],
@@ -129,17 +129,17 @@ with st.expander(label=f'📅 How are you today, {st.session_state.name}?'):
 # Welcome
 show_pages(
     [
-        Page('Home.py', 'Homepage', '👤'),
-        Page('menu_pages/wellbeing.py', 'Student Wellbeing', '📊'),
-        Page('menu_pages/profile.py', f'{st.session_state.name}\'s Profile', '🧑'),
-        Page('menu_pages/toolkit.py', f'{st.session_state.name}\'s Toolkit', '🛠️'),
-        Page('menu_pages/appointment.py', 'Set an Appointment', '📄'),
-        Page('menu_pages/support.py', 'Chat with Support Group', '🫂'),
-        Page('menu_pages/counselor.py', 'Chat with Counselor', '💬'),
-        Page('menu_pages/about.py', 'About', '💡'),
-        Page('menu_pages/study.py', 'Study', '💡'),
-        Page('menu_pages/meditate.py', 'Meditate', '🧘'),
-        Page('menu_pages/read.py', 'Read', '📚')
+        Page('Student/Home.py', 'Homepage', '👤'),
+        Page('Student/menu_pages/wellbeing.py', 'Student Wellbeing', '📊'),
+        Page('Student/menu_pages/profile.py', f'{st.session_state.name}\'s Profile', '🧑'),
+        Page('Student/menu_pages/toolkit.py', f'{st.session_state.name}\'s Toolkit', '🛠️'),
+        Page('Student/menu_pages/appointment.py', 'Set an Appointment', '📄'),
+        Page('Student/menu_pages/support.py', 'Chat with Support Group', '🫂'),
+        Page('Student/menu_pages/counselor.py', 'Chat with Counselor', '💬'),
+        Page('Student/menu_pages/about.py', 'About', '💡'),
+        Page('Student/menu_pages/study.py', 'Study', '💡'),
+        Page('Student/menu_pages/meditate.py', 'Meditate', '🧘'),
+        Page('Student/menu_pages/read.py', 'Read', '📚')
     ]
 )
 

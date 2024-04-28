@@ -49,14 +49,14 @@ with st.container( border = True):
 
     def visualize_moods_with_images(df):
         mood_images = {
-            'Happy': mpimg.imread('images/8_happy.png'),
-            'Amused': mpimg.imread('images/7_amused.png'),
-            'Inspired': mpimg.imread('images/6_inspired.png'),
-            'Don\'t Care': mpimg.imread('images/5_dont_care.png'),
-            'Annoyed': mpimg.imread('images/4_annoyed.png'),
-            'Afraid': mpimg.imread('images/3_afraid.png'),
-            'Sad': mpimg.imread('images/2_sad.png'),
-            'Angry': mpimg.imread('images/1_angry.png')
+            'Happy': mpimg.imread('Student/images/8_happy.png'),
+            'Amused': mpimg.imread('Student/images/7_amused.png'),
+            'Inspired': mpimg.imread('Student/images/6_inspired.png'),
+            'Don\'t Care': mpimg.imread('Student/images/5_dont_care.png'),
+            'Annoyed': mpimg.imread('Student/images/4_annoyed.png'),
+            'Afraid': mpimg.imread('Student/images/3_afraid.png'),
+            'Sad': mpimg.imread('Student/images/2_sad.png'),
+            'Angry': mpimg.imread('Student/images/1_angry.png')
         }
 
         fig, ax = plt.subplots(figsize=(10, 4))
