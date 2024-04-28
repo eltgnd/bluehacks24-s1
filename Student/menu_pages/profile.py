@@ -29,7 +29,9 @@ with col1:
         st.metric('Answer Streak', f'{check_streak()} days', delta='Nice work!')
 
 # Daily Survey
-with st.expander('Daily Mood'):
+
+with st.container( border = True):
+    st.write('Daily Mood')
     sql = f"""SELECT Mood FROM Sheet1 WHERE "Student ID" = '{st.session_state.student_id}' ORDER BY Date;"""
     df = conn.query(sql=sql, ttl=0).dropna(how = "all").reset_index(drop = True)
 
@@ -53,7 +55,7 @@ with st.expander('Daily Mood'):
         for i, mood in enumerate(df['Mood'].unique()):
             ax.imshow(mood_images[mood], extent=(i, i+1, 0, 1))
         ax.set_xlim(0, 10)
-        ax.set_ylim(0, 5)
+        ax.set_ylim(0, 2)
 
         st.pyplot(fig)
 
