@@ -8,7 +8,7 @@ import datetime as dt
 import control_flow as cf
 
 @st.cache_resource(ttl=86400, max_entries = 1)
-def groupchat_connect_to_user_database(user_id):
+def groupchat_connect_to_user_database():
     conn = st.connection("user", type=GSheetsConnection)
 
     return conn
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
     st.divider()
 
-    conn = groupchat_connect_to_user_database(user_id = st.session_state["student_id"])
+    conn = groupchat_connect_to_user_database()
 
     @st.cache_data(max_entries = 10, ttl = 86400)
     def get_groupchat_info(user_id):
@@ -70,13 +70,9 @@ if __name__ == "__main__":
 
     chat_empty = st.empty()
 
-    # if st.session_state["clear_messages"]:
-    #     chat_empty.empty()
-    #     st.session_state["clear_messages"] = False
-
     # Input message
 
-    with st.form("input message"):
+    with st.form("input message", clear_on_submit = True):
         form_cols = st.columns([9,1])
         with form_cols[0]:
             new_message = st.text_area("Send a message", max_chars = 500, label_visibility = "hidden")

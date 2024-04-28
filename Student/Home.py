@@ -62,15 +62,16 @@ def check_password():
     # Log-in
     def log_in():
         with st.form('Credentials'):
-            st.text_input("Enter your student ID", type='default', key='student_id')
+            st.text_input("Enter your student ID", type='default', key='student_id_input')
             st.text_input("Enter your password", type="password", key="password")
             st.form_submit_button("Log-in", on_click=password_entered)
  
     def password_entered():
         sql = 'SELECT * FROM Sheet1;'
         df = conn.query(sql=sql, ttl=0) 
-        match = (df['user_id'].eq(st.session_state.student_id) & df['password'].eq(st.session_state.password)).any()
+        match = (df['user_id'].eq(st.session_state.student_id_input) & df['password'].eq(st.session_state.password)).any()
         if match:
+            st.session_state["student_id"] = st.session_state.student_id_input
             st.session_state["password_correct"] = True  
             st.session_state['name'] = df[df.user_id == st.session_state.student_id].reset_index().at[0,'nickname']
         else:
@@ -137,6 +138,7 @@ show_pages(
         Page('menu_pages/support.py', 'Chat with Support Group', '🫂'),
         Page('menu_pages/counselor.py', 'Chat with Counselor', '💬'),
         Page('menu_pages/about.py', 'About', '💡'),
+        
     ]
 
 )
