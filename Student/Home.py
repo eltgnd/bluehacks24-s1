@@ -102,7 +102,8 @@ with col2:
         st.markdown("The current counselor-to-student proportion among Philippine schools faces a staggering alarming ratio of 1 counselor for every 14,000 students, compared to the recommended global standard of 1:250. Hence, there is a growing need to further address this declining mental health and wellbeing among Filipino high school and college students.")
 
 # Daily wellbeing
-st.session_state.mood_button = False
+if 'mood_button' not in st.session_state:
+    st.session_state.mood_button = False
 with st.expander(label=f'📅 How are you today, {st.session_state.name}?'):
     st.write(f"🌱 Selet your mood for today by clicking on the corresponding image.")
     mood_lst = ["Happy", "Amused", "Inspired", "Don't Care", "Annoyed", "Afraid", "Sad", "Angry"]
