@@ -28,8 +28,8 @@ if __name__ == "__main__":
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.title(f"{emoji} Support Group Chat")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    st.title(f"{emoji} Private Chat")
+    st.write('Welcome to the Support Group Chat, where counselors receive messages directly from students seeking assistance. This platform allows for confidential and immediate communication between students and counselors, ensuring timely support and intervention. As counselors, your role is crucial in providing guidance, empathy, and resources to students in need. Engage in meaningful conversations, offer support, and empower students on their journey toward mental well-being. Your dedication makes a difference in the lives of those you serve.')
     st.divider()
 
     user_id = st.session_state["counselor_id"]

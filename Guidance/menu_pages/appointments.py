@@ -64,7 +64,7 @@ if __name__ == "__main__":
     st.markdown(f"""
     ## Hello, {st.session_state.name}!
 
-    This page contains your past and upcoming appointments.
+    This page contains your past and upcoming appointments, providing you with a comprehensive overview of your counseling schedule. Easily track your sessions, manage cancellations or rescheduling requests, and stay organized with our intuitive appointment management system. With Bughaw, taking care of your mental health has never been more convenient. Take control of your well-being and schedule your next appointment with ease.
 
     """)
 

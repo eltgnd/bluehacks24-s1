@@ -9,6 +9,9 @@ from PIL import Image
 def turn_int(x):
     return int(x)
 
+# Page config
+st.set_page_config(page_title='Data Analytics', page_icon='📊', layout="centered", initial_sidebar_state="auto", menu_items=None)
+
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
 
@@ -16,7 +19,7 @@ conn = st.connection("survey", type=GSheetsConnection)
 st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
 st.markdown("""
-    View descriptive analytics from student-provided data.        
+    Welcome to the Data Analytics section, where counselors gain valuable insights into students' survey data to inform policy decisions and program development. Here, you'll find a comprehensive overview of survey results, aggregated and categorized based on various metrics such as demographics and time periods. Use this data to identify trends, understand student needs, and tailor interventions effectively. Your data-driven approach plays a vital role in promoting student well-being and fostering a supportive learning environment. Together, let's harness the power of information to create positive change.        
     Choose a question and *then* choose a descriptive statistic.
 """)
 
