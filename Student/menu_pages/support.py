@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
     st.caption('BUGHAW   |   STUDENTS\' PORTAL')
     st.title(f"{emoji} Support Group Chat")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    st.write(' Connect with others in a safe and anonymous space on our Support Group Chat. Share your thoughts, feelings, and experiences with peers who understand and support you. Get advice, encouragement, and solidarity as you navigate life\'s challenges together.')
     st.divider()
 
     conn = groupchat_connect_to_user_database()

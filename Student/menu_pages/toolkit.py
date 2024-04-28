@@ -60,8 +60,9 @@ def image_to_base64(image):
 col1, col2 = st.columns([20,30])
 
 with col1:
-    st.write('Study 💡: Dive into our Study page to discover tips and tricks for optimizing your academic performance. From effective study techniques to time management strategies, we\'ve curated resources to help you excel in your studies. Whether you\'re preparing for exams or tackling a challenging assignment, our Study page is your guide to academic success. 📖✏️')
-    st.write('Meditate 🧘: Step into tranquility with our Meditate page, where you can embark on a journey of mindfulness and inner peace. Explore guided meditation sessions, breathing exercises, and relaxation techniques to calm your mind and soothe your soul. Take a moment to pause, breathe, and reconnect with yourself amidst the busyness of life. Find your center and cultivate a sense of serenity with our meditation resources. 🌿☮️')
+    st.write('Study 💡: Explore our Study page to learn techniques for managing emotions like annoyance, fear, sadness, anger, and stress. Empower yourself with strategies to enhance your emotional well-being.')
+    st.write('Meditate 🧘: Find peace and relaxation on our Meditate page. Watch guided meditation videos to calm your mind, reduce stress, and cultivate mindfulness.')
+    st.write('Read 📚: Stay informed about mental health with our Read page. Access the latest news and articles covering important topics and insights into well-being.')
 
 #Read 📚: Immerse yourself in a world of knowledge and inspiration with our Read page. Discover a curated collection of articles, blogs, and resources on mental health, self-care, and personal development. From expert insights to real-life stories, there's something for everyone to explore. Expand your mind, gain new perspectives, and empower yourself with the wisdom found within the pages of our Read section. 📖🌟')
 
