@@ -20,7 +20,7 @@ cf.load_initial_data_if_needed(force = True)
 placeholder = st.empty()
 
 # Title
-st.image('images/BUGHAW.png', width=100)
+st.image('images/BUGHAW.png', width=150)
 add_vertical_space(1)
 st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 
