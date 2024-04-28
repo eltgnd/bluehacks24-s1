@@ -14,7 +14,7 @@ def groupchat_connect_to_user_database():
 
 if __name__ == "__main__":
 
-    emoji = ":speech_balloon:"
+    emoji = "🫂"
 
     st.set_page_config(
         page_title = "Support Group Chat",
