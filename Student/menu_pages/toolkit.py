@@ -1,9 +1,13 @@
 import streamlit as st
 from streamlit_image_select import image_select
+from st_pages import Page, Section,show_pages, add_page_title, hide_pages
 from PIL import Image
 from streamlit.components.v1 import html
 
-st.title("Toolkit")
+# Title
+st.title(f"🛠️ {st.session_state.name}\'s Toolkit")
+st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.divider()
 
 # Assuming mood and mood_list are defined elsewhere
 mood = st.session_state['mood']
@@ -48,64 +52,24 @@ def image_to_base64(image):
     return base64.b64encode(buffered.getvalue()).decode()
 
 # Displaying the image on the left
-col1, col2, col3, col4, col5 = st.columns([2, 30, 30, 30, 32])
+col1, col2 = st.columns([20,30])
+
 with col1:
-    st.image(image, width =300)
+    st.write('💡 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
 
 # Displaying buttons on the right
-with col5:
-    if st.button('Study'):
-        nav_page("study")
-    if st.button('Meditate'):
-        nav_page("meditate")
-    if st.button('Read'):
-        nav_page("read")
-    if st.button('Journal'):
-        nav_page("journal")
+with col2:
+    st.image(image, width=400)
 
-# Hide pages
-def hide_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.display = "none";', **kwargs)
+    s0, s1, s2, s3, s4 = st.columns([2,8,10,8,3], gap='small')
+    with s1:
+        if st.button('Study 💡'):
+            nav_page("study")
+    with s2:
+        if st.button('Meditate 🧘'):
+            nav_page("meditate")
+    with s3:
+        if st.button('Read 📚'):
+            nav_page("read")
 
-def show_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.display = "";', **kwargs)
-
-def disable_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.pointerEvents = "none"; '
-                                   'link.style.opacity = 0.5;', **kwargs)
-
-def enable_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.pointerEvents = ""; '
-                                   'link.style.opacity = "";', **kwargs)
-
-def _inject_page_script(page_name, action_script, timeout_secs=3):
-    page_script = """
-        <script type="text/javascript">
-            function attempt_exec_page_action(page_name, start_time, timeout_secs, action_fn) {
-                var links = window.parent.document.getElementsByTagName("a");
-                for (var i = 0; i < links.length; i++) {
-                    if (links[i].href.toLowerCase().endsWith("/" + page_name.toLowerCase())) {
-                        action_fn(links[i]);
-                        return;
-                    }
-                }
-                var elasped = new Date() - start_time;
-                if (elasped < timeout_secs * 1000) {
-                    setTimeout(attempt_exec_page_action, 100, page_name, start_time, timeout_secs, action_fn);
-                } else {
-                    alert("Unable to locate link to page '" + page_name + "' after " + timeout_secs + " second(s).");
-                }
-            }
-            window.addEventListener("load", function() {
-                attempt_exec_page_action("%s", new Date(), %d, function(link) {
-                    %s
-                });
-            });
-        </script>
-    """ % (page_name, timeout_secs, action_script)
-    html(page_script, height=0)
-
-hide_page("study")
-hide_page("test")
-hide_page("meditate")
-hide_page("read")
+st.divider()

@@ -12,7 +12,7 @@ from PIL import Image
 
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-hide_pages(['meditate', 'read', 'study'])
+# hide_pages(['meditate', 'read', 'study'])
 
 # Google Sheets Connection
 conn = st.connection("user", type=GSheetsConnection)
@@ -138,6 +138,7 @@ show_pages(
         Page('menu_pages/support.py', 'Chat with Support Group', '🫂'),
         Page('menu_pages/counselor.py', 'Chat with Counselor', '💬'),
         Page('menu_pages/about.py', 'About', '💡'),
+
         
     ]
 
