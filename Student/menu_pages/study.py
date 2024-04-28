@@ -1,5 +1,11 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title = "Release the tension...",
+    page_icon = "🧠",
+    initial_sidebar_state = "expanded",
+)
+
 st.title("Release the tension...")
 
 # Define the options

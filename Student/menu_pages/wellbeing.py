@@ -6,6 +6,12 @@ from streamlit_image_select import image_select
 from PIL import Image
 import datetime
 
+st.set_page_config(
+    page_title = "Student Wellbeing",
+    page_icon = "📊",
+    initial_sidebar_state = "expanded",
+)
+
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
 

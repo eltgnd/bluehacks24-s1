@@ -3,6 +3,12 @@ from streamlit_image_select import image_select
 from PIL import Image
 from streamlit.components.v1 import html
 
+st.set_page_config(
+    page_title = f'{st.session_state.name}\'s Toolkit',
+    page_icon = "🛠️",
+    initial_sidebar_state = "expanded",
+)
+
 st.title("Toolkit")
 
 # Assuming mood and mood_list are defined elsewhere

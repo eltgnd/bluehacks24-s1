@@ -31,7 +31,7 @@ with col1:
 # Daily Survey
 with st.expander('Daily Mood'):
     sql = f"""SELECT Mood FROM Sheet1 WHERE "Student ID" = '{st.session_state.student_id}' ORDER BY Date;"""
-    df = conn.query(sql=sql, ttl=0)
+    df = conn.query(sql=sql, ttl=0).dropna(how = "all").reset_index(drop = True)
 
     def visualize_moods_with_images(df):
         mood_images = {

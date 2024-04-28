@@ -22,6 +22,12 @@ def get_playlist(playlists):
 playlist = ['https://www.youtube.com/watch?v=9TXgKPSLxIY&list=PLW8o3_GFoCBNWV3KtiiXNsg3zDgZqEyFf&ab_channel=Headspace']
 pl_urls = get_playlist(playlist)
 
+st.set_page_config(
+    page_title = "Meditation of the Day",
+    page_icon = "🧘",
+    initial_sidebar_state = "expanded",
+)
+
 st.title("Meditation of the Day")
 
 rng = rand.randint(1,len(pl_urls))
