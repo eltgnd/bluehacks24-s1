@@ -6,15 +6,67 @@ from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_image_select import image_select
 import control_flow as cf
+from streamlit.components.v1 import html
 import datetime
 from PIL import Image
 
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-# Bypass log-in
-st.session_state["password_correct"] = True 
-st.session_state['name'] = 'Richell'
-st.session_state['student_id'] = 's222869'
+# Hide pages
+def hide_page(page_name, **kwargs):
+    _inject_page_script(page_name, 'link.style.display = "none";', **kwargs)
+
+def show_page(page_name, **kwargs):
+    _inject_page_script(page_name, 'link.style.display = "";', **kwargs)
+
+def disable_page(page_name, **kwargs):
+    _inject_page_script(page_name, 'link.style.pointerEvents = "none"; '
+                                   'link.style.opacity = 0.5;', **kwargs)
+
+def enable_page(page_name, **kwargs):
+    _inject_page_script(page_name, 'link.style.pointerEvents = ""; '
+                                   'link.style.opacity = "";', **kwargs)
+
+def _inject_page_script(page_name, action_script, timeout_secs=3):
+    page_script = """
+        <script type="text/javascript">
+            function attempt_exec_page_action(page_name, start_time, timeout_secs, action_fn) {
+                var links = window.parent.document.getElementsByTagName("a");
+                for (var i = 0; i < links.length; i++) {
+                    if (links[i].href.toLowerCase().endsWith("/" + page_name.toLowerCase())) {
+                        action_fn(links[i]);
+                        return;
+                    }
+                }
+                var elasped = new Date() - start_time;
+                if (elasped < timeout_secs * 1000) {
+                    setTimeout(attempt_exec_page_action, 100, page_name, start_time, timeout_secs, action_fn);
+                } else {
+                    alert("Unable to locate link to page '" + page_name + "' after " + timeout_secs + " second(s).");
+                }
+            }
+            window.addEventListener("load", function() {
+                attempt_exec_page_action("%s", new Date(), %d, function(link) {
+                    %s
+                });
+            });
+        </script>
+    """ % (page_name, timeout_secs, action_script)
+    html(page_script, height=0)
+
+hide_page("02-📊-Student Wellbeing")
+hide_page("03-📄-Book Appointment")
+hide_page("05 -🧑 Profile")
+hide_page("06-🫂-Support Group Chat")
+hide_page("07-💬-Counselor Chat")
+hide_page("08 -🛠️ Toolkit")
+hide_page("10-📄-About")
+
+hide_page("study")
+hide_page("test")
+hide_page("listen")
+hide_page("meditate")
+hide_page("journal")
 
 # Google Sheets Connection
 conn = st.connection("user", type=GSheetsConnection)
@@ -35,10 +87,6 @@ def update_data(survey_type):
     conn.update(worksheet="Sheet1", data=df)
     st.success("Worksheet Updated! 🥳")
 
-# Parameters for now, this will come from survey page:
-mood = 'Happy'
-name = 'Osen'
-experience = 999
 
 # Initialize
 cf.load_initial_data_if_needed(force = True)
@@ -61,7 +109,6 @@ st.markdown(f"""
 
 # User Authentication
 def check_password():
-
     # Sample
     placeholder.write('Try this sample student ID: s222869, password: hello876')
 

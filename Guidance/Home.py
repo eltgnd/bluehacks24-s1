@@ -11,11 +11,6 @@ from PIL import Image
 
 st.set_page_config(page_title='Bughaw Counsellors\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-# Bypass log-in
-st.session_state["password_correct"] = True 
-st.session_state['name'] = 'Mark'
-st.session_state['counsellor_id'] = 'g001'
-
 # Google Sheets Connection
 conn = st.connection("user", type=GSheetsConnection)
 
