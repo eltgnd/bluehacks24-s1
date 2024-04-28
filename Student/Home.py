@@ -9,6 +9,7 @@ import control_flow as cf
 from streamlit.components.v1 import html
 import datetime
 from PIL import Image
+import pandas as pd
 
 # Set page config
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
@@ -21,13 +22,23 @@ def update_data(survey_type):
     df = conn.read(worksheet='Sheet1', ttl=0)
     now = datetime.datetime.now()
 
-    df.loc[len(df.index)] = [
-        st.session_state.student_id,
-        now,
-        st.session_state.ga if survey_type=='g' else None,
-        st.session_state.ma if survey_type=='m' else None,
-        st.session_state.mood if survey_type=='d' else None
-    ]
+    new_row = {
+        "Student ID": st.session_state.student_id,
+        "Date": now,
+        "General Survey": st.session_state.ga if survey_type=='g' else None,
+        "Monthly Survey": st.session_state.ma if survey_type=='m' else None,
+        "Mood": st.session_state.mood if survey_type=='d' else None,
+    }
+
+    new_row = pd.Series(new_row)
+
+    new_row_df = pd.DataFrame([new_row], index = [0])
+
+    df = pd.concat(
+        objs = [df, new_row_df],
+        axis = 0,
+        ignore_index = True
+    )
 
     conn.update(worksheet="Sheet1", data=df)
     st.success("Worksheet Updated! 🥳")
