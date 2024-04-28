@@ -102,11 +102,11 @@ st.write('Welcome to Bughaw Counselors\' Portal. Step into a world where mental 
 col1, col2 = st.columns(2)
 with col1:
     with st.expander(label='WHAT IS BUGHAW', expanded=False):
-        st.write('Lorem ipsum')
+        st.write("Bughaw is a web-based platform designed to address mental health issues among Filipino students, offering features like well-being check-ins, personalized toolkits, appointment scheduling, and anonymous support groups. It aims to provide accessible and data-driven solutions for students and counselors alike. ")
 with col2:
     with st.expander(label='WHY BUGHAW'):
         section_text = ''
-        st.markdown(f"**:blue[Ratio something something.]**\n\n{section_text}")
+        st.markdown("The current counselor-to-student proportion among Philippine schools faces a staggering alarming ratio of 1 counselor for every 14,000 students, compared to the recommended global standard of 1:250. Hence, there is a growing need to further address this declining mental health and wellbeing among Filipino high school and college students.")
 
 # About Bughaw
 st.header('Get to know your Bughaw!')
