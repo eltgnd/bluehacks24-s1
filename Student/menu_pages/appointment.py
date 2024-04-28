@@ -4,7 +4,6 @@ import streamlit.components.v1 as components
 
 
 if __name__ == "__main__":
-    
     # Page symbol
     emoji = ":page_facing_up:"
 

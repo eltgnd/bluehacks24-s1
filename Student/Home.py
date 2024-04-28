@@ -10,6 +10,7 @@ from streamlit.components.v1 import html
 import datetime
 from PIL import Image
 
+# Set page config
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # Google Sheets Connection

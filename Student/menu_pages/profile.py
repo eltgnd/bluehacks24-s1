@@ -6,6 +6,9 @@ from streamlit_gsheets import GSheetsConnection
 from PIL import Image
 import pandas as pd
 
+# Set page config
+st.set_page_config(page_title=f'{st.session_state.name}\'s Profile', page_icon='🧑', layout="centered", initial_sidebar_state="auto", menu_items=None)
+
 # Google Sheets Connection
 conn = st.connection("survey", type=GSheetsConnection)
 
