@@ -12,7 +12,10 @@ conn = st.connection("survey", type=GSheetsConnection)
 # Title
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
-st.write(f'Student ID: {st.session_state.student_id}')
+st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+
+with st.container(border=True):
+    st.write(f'Student ID: {st.session_state.student_id}')
 
 def check_streak():
     sql = f"""SELECT Date FROM Sheet1 WHERE "Student ID"='{st.session_state.student_id}' ORDER BY Date;"""
@@ -26,7 +29,13 @@ def check_streak():
 col1, col2, col3 = st.columns(3)
 with col1:
     with st.container(border=True):
-        st.metric('Answer Streak', f'{check_streak()} days', delta='Nice work!')
+        st.metric('Answer Streak', f'{check_streak()} days 🚀', delta='Nice work!')
+with col2:
+    with st.container(border=True):
+        st.metric('Next Weekly Checkup', '8 days 🪴', delta='Coming soon!')
+with col3:
+    with st.container(border=True):
+        st.metric('Next Monthly Checkup', '23 days 📅', delta='You\'re doing great.')
 
 # Daily Survey
 
