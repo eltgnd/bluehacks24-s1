@@ -30,7 +30,7 @@ with login_placeholder:
     st.markdown(f"""
         <div style="line-height:450%;">
             <span style=" font-size:80px ; color:#023E8A ; font-weight:bold; ">From blue </span>
-            <span style=" font-size:80px ; color:#31333F ; font-weight:bold; ">to hue</span>
+            <span style=" font-size:80px ; color:#31333F ; font-weight:bold; ">to every hue</span>
             <span style=" font-size:80px ; color:#31333F ; font-weight:bold; ">.</span>
         </div>""",
         unsafe_allow_html=True
