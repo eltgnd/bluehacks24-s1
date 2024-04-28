@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
     st.title(f"{emoji} Support Group Chat")
-    st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    st.write('Welcome to the Support Group Chat moderated by our dedicated counselors. This safe and confidential space is designed to provide students with peer support, guidance, and encouragement. Our counselors are here to ensure a supportive environment where you can freely express yourself, share your experiences, and receive assistance when needed. Join the conversation, connect with your peers, and let\'s navigate through challenges together. Your mental well-being is our priority.')
     st.divider()
 
     user_id = st.session_state["counselor_id"]
