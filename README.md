@@ -1,4 +1,4 @@
-![alt text](https://github.com/compsat/bh24-s1/blob/main/Student/images/BUGHAW.png?raw=true)
+![alt text](https://github.com/compsat/bh24-s1/blob/main/BUGHAW_title.png?raw=true)
 
 An entry to the CompSat's Blue Hacks 2024 with a of Mental Health Matters rooted from the United Nations’ 3rd Sustainable Development Goal: Good Health and Well Being, The Bughaw web app was developed by 2nd year BS Applied Mathematics - Master in Data Science students in Ateneo de Manila University. 💙
 
