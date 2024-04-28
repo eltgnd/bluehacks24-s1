@@ -71,7 +71,6 @@ if __name__ == "__main__":
     # Select the appointment calendar specific to the guidance counselor
     # by checking the calendars array for the user_id of the guidance counselor
     # as a substring
-    # Reference: [wait nawawala]
     selected_calendar = [calendar for calendar in calendars if 
                          counselors[st.session_state.counselor_id] == calendar][0]
 

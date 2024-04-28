@@ -98,7 +98,7 @@ show_pages(
 )
 
 # Information about the app
-st.write('Welcome to Bughaw Counselors\' Portal. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.write('Welcome to Bughaw Counselors\' Portal. Step into a world where mental health support is just a click away. Here, counselors are equipped with the tools and resources to make a real difference in students\' lives. From personalized interventions to anonymous group chats, we\'re dedicated to fostering a safe and supportive environment for students to thrive. Join us in our mission to empower individuals, transform communities, and paint a brighter future—one shade of blue at a time.')
 col1, col2 = st.columns(2)
 with col1:
     with st.expander(label='WHAT IS BUGHAW', expanded=False):
