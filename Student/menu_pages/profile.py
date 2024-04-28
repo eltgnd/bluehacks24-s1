@@ -35,7 +35,7 @@ with col1:
         st.metric('Answer Streak', f'{check_streak()} days 🚀', delta='Nice work!')
 with col2:
     with st.container(border=True):
-        st.metric('Next Weekly Checkup', '8 days 🪴', delta='Coming soon!')
+        st.metric('Next Weekly Checkup', '6 days 🪴', delta='Coming soon!')
 with col3:
     with st.container(border=True):
         st.metric('Next Monthly Checkup', '23 days 📅', delta='You\'re doing great.')
@@ -100,8 +100,7 @@ with st.expander('Weekly Wellbeing'):
         ind = question_lst.index(option)
         filtered_df = df[['Date', ind]]
 
-        fig = px.line(df, x='Date', y=ind, title='Response History')
-        fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
+        fig = px.bar(df, x='Date', y=ind, title='Response History')
 
         st.plotly_chart(fig, use_container_width=True)
 
@@ -133,7 +132,6 @@ with st.expander('Monthly Wellbeing'):
         ind = question_lst.index(option)
         filtered_df = df[['Date', ind]]
 
-        fig = px.line(df, x='Date', y=ind, title='Response History')
-        fig.update_traces(line=dict(width=2, color='DarkSlateGrey'))
+        fig = px.bar(df, x='Date', y=ind, title='Response History')
 
         st.plotly_chart(fig, use_container_width=True)
