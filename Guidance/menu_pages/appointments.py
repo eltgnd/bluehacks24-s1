@@ -76,8 +76,8 @@ if __name__ == "__main__":
                          counselors[st.session_state.counselor_id] == calendar][0]
 
    # Different views for the selectbox
-   # Select is default/placeholder
-    views = ['Select', 'Calendar', 'List']
+   # Select an option is default/placeholder
+    views = ['Select an option', 'Calendar', 'List']
 
     views = st.selectbox(
         "Appointment Views",
@@ -89,23 +89,24 @@ if __name__ == "__main__":
         
     elif views == 'List':
         # Query the appointments calendar of the guidance counselor logged in.
-        sql = f"""SELECT {selected_calendar} AS Schedule, username AS Username, anonymous AS Anonymous, online_or_onsite AS 'Online or Onsite?' FROM appointments;"""
+        sql = f"""SELECT {selected_calendar} AS calendar, username AS Username, anonymous AS Anonymous, online_or_onsite AS 'Online or Onsite?' FROM appointments;"""
         
         df = conn.query(sql=sql).dropna(how='any') # Drop empties
-        df['date_modified'] = df['Schedule'].apply(reformat_datetime) # Reformat the appointment schedules to a format we can use for comparison
+        df['Schedule'] = df['calendar'].apply(reformat_datetime) # Reformat the appointment schedules to a format we can use for comparison
         
         st.write("Select what you want to view.")
+        st.write("You may *click* on the column headers to sort the data!")
 
         past = st.toggle('Past Appointments', key='past')
         if past:
             # Show past appointments
-            df1 = df[df['date_modified'] <= dt_now]
+            df1 = df[df['Schedule'] <= dt_now]
             st.dataframe(df1[['Schedule', 'Username', 'Anonymous', 'Online or Onsite?']])
 
         upcoming = st.toggle('Upcoming Appointments', key='upcoming')
         if upcoming:
             # Show upcoming appointments
-            df2 = df[df['date_modified'] >= dt_now]
+            df2 = df[df['Schedule'] >= dt_now]
             st.dataframe(df2[['Schedule', 'Username', 'Anonymous', 'Online or Onsite?']])
 
     # ---------

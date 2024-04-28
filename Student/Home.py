@@ -165,16 +165,45 @@ style_metric_cards(border_left_color='#023E8A', border_radius_px=7, box_shadow=F
 st.divider()
 
 # Features Overview
-option = st.radio('Get to know Bughaw\'s features!', ['Mental Health Feed', 'Student Wellbeing', 'Book Appointment', 'Profile', 'Group Chat'])
+import streamlit as st
+
+option = st.radio('Get to know Bughaw\'s features!', ['Student Wellbeing', 'Profile', 'Toolkit', 'Appointment', 'Support Group Chat', 'Counselor Chat'])
+
 descriptions = {
-'Mental Health Feed':'The Mental Health Feed displays collated articles from various websites that specifically address and provide tips about mental health, such as but not limited to HelpGuide.org and Science Daily',
-'Student Wellbeing':'The Student Dashboard serves as a regular mental wellbeing check-in surveys for your daily mood, weekly general health status, and monthly sense of coherence that altogether holistically assess the status of your mental health.',
-'Book Appointment':'The Appointment Scheduler is an efficient, go-to, guided scheduler that allows you to book an appointment with a guidance counselor. This includes a quick look at the counselor’s monthly calendar to proactively determine free slots, as well as a request form that caters to your anonymity.',
-'Group Chat': '',
-'Profile':'The Profile Tab is a repository of your personal information that also allows you to track your own mental health journey through a series of easily comprehensible statistical analysis of your past survey responses.',
-'Group Chat':'The About Tab is a quick briefer and information tab about Bughaw, its purpose, limitations, as well as the references used all  throughout the website.'
+    'Student Wellbeing': '''
+        Bughaw's Student Wellbeing feature is designed to make mental health resources and support accessible to people regardless of location, income, or cultural background. Through this feature, users can access a diverse range of mental health resources, including articles, videos, and self-help tools, available in multiple languages. Additionally, Bughaw provides a directory of local mental health services and support groups, ensuring that users can find assistance tailored to their specific needs and circumstances.
+    ''',
+
+    'Profile': '''
+        The Profile feature allows users to create personalized profiles where they can track their mental health journey and set wellness goals. By regularly updating their profiles with mood indicators, journal entries, and self-assessment tools, users can monitor their mental health status and identify early warning signs of mental health struggles. Bughaw utilizes machine learning algorithms to analyze user data and provide personalized recommendations for mental wellness activities and resources.
+    ''',
+
+    'Toolkit': '''
+        Bughaw's Toolkit feature empowers individuals to create their own mental wellness toolkit with techniques that work for them. Users can explore a variety of evidence-based coping strategies, such as mindfulness exercises, breathing techniques, and relaxation techniques, and add their favorites to their toolkit. The toolkit also includes customizable self-care plans and reminders, helping users integrate mental wellness practices into their daily routines and manage stress more effectively.
+    ''',
+
+    'Appointment': '''
+        The Appointment feature allows users to schedule confidential appointments with licensed mental health professionals, including counselors, therapists, and psychiatrists. Through Bughaw's secure telehealth platform, users can connect with providers via video conferencing or messaging, eliminating barriers to accessing mental health care, such as long wait times and transportation issues. Bughaw also offers flexible payment options, including sliding-scale fees and insurance billing, to ensure affordability and accessibility.
+    ''',
+
+    'Support Group Chat': '''
+        Bughaw's Support Group Chat feature provides a creative way to anonymously connect people seeking support with those willing to offer it. Users can join virtual support groups based on shared experiences or interests, such as depression, anxiety, LGBTQ+ identity, or student stress. Within these supportive communities, users can engage in group discussions, share coping strategies, and offer mutual encouragement and understanding, fostering a sense of belonging and connection.
+    ''',
+
+    'Counselor Chat': '''
+        Bughaw's Counselor Chat feature leverages technology to offer self-soothing tools and guided techniques for managing acute anxiety or panic attacks. Users can access a variety of resources, such as relaxation exercises, grounding techniques, and cognitive-behavioral therapy (CBT) interventions, designed to help them cope with distressing symptoms in real-time. Additionally, users have the option to connect with licensed counselors and crisis intervention specialists for immediate support and guidance.
+    '''
+}
+
+emoji = {
+    'Student Wellbeing': "Student Wellbeing 📊",
+    'Profile': "Profile 🧑",
+    'Toolkit': "Toolkit 🛠️",
+    'Appointment': "Appointment 📄",
+    'Support Group Chat': "Support Group Chat 🫂",
+    'Counselor Chat': "Counselor Chat 💬"
 }
 
 with st.container(border=True):
-    st.subheader(option)
+    st.subheader(emoji[option])
     st.write(descriptions[option])
