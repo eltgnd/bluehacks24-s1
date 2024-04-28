@@ -4,7 +4,6 @@ import numpy as np
 from streamlit_gsheets import GSheetsConnection
 import time
 import datetime as dt
-
 import control_flow as cf
 
 @st.cache_resource(ttl=86400, max_entries = 1)
@@ -15,7 +14,7 @@ def groupchat_connect_to_user_database():
 
 if __name__ == "__main__":
 
-    emoji = ":speech_balloon:"
+    emoji = ":speech_balloon:" 
 
     st.set_page_config(
         page_title = "Support Group Chat",
@@ -23,15 +22,17 @@ if __name__ == "__main__":
         initial_sidebar_state = "expanded",
     )
 
+    # Caption
+    st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
+    
     # Load initial data if it hasn't already been loaded.
     cf.load_initial_data_if_needed()
 
-    st.caption('BUGHAW   |   STUDENTS\' PORTAL')
     st.title(f"{emoji} Support Group Chat")
     st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
     st.divider()
 
-    user_id = st.session_state["counsellor_id"]
+    user_id = st.session_state["counselor_id"]
 
     conn = groupchat_connect_to_user_database()
 
@@ -50,7 +51,7 @@ if __name__ == "__main__":
 
     info = get_groupchat_info(user_id)
     
-    chat_id_list = info["groupchat_id_list"]
+    chat_id_list = info["assigned_student_id_list"]
     keyword = "guidance"
 
     # Preparations to display messages
@@ -67,17 +68,21 @@ if __name__ == "__main__":
     if "support_open_chat" not in st.session_state:
         st.session_state["support_open_chat"] = False
 
+    # Select group chat
+
     def open_chat_callback(decision):
         st.session_state["support_open_chat"] = decision
 
     # Select group chat
-    selected_groupchat_id = st.selectbox(
-        "Select a group chat",
+    selected_student_id = st.selectbox(
+        "Select a student to chat with",
         options = chat_id_list,
         index = 0,
         args = (False,),
         on_change = open_chat_callback
-    )    
+    )
+
+    selected_groupchat_id = f"PRIVATE_{selected_student_id}_{user_id}"
 
     open_chat_button = st.button("Open chat", args = (True,), on_click = open_chat_callback)
 

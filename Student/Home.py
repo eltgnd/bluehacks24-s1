@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 from streamlit_gsheets import GSheetsConnection
-from st_pages import Page, Section,show_pages, add_page_title
+from st_pages import Page, Section,show_pages, add_page_title, hide_pages
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_extras.metric_cards import style_metric_cards
 from streamlit_image_select import image_select
@@ -12,61 +12,7 @@ from PIL import Image
 
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-# Hide pages
-def hide_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.display = "none";', **kwargs)
-
-def show_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.display = "";', **kwargs)
-
-def disable_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.pointerEvents = "none"; '
-                                   'link.style.opacity = 0.5;', **kwargs)
-
-def enable_page(page_name, **kwargs):
-    _inject_page_script(page_name, 'link.style.pointerEvents = ""; '
-                                   'link.style.opacity = "";', **kwargs)
-
-def _inject_page_script(page_name, action_script, timeout_secs=3):
-    page_script = """
-        <script type="text/javascript">
-            function attempt_exec_page_action(page_name, start_time, timeout_secs, action_fn) {
-                var links = window.parent.document.getElementsByTagName("a");
-                for (var i = 0; i < links.length; i++) {
-                    if (links[i].href.toLowerCase().endsWith("/" + page_name.toLowerCase())) {
-                        action_fn(links[i]);
-                        return;
-                    }
-                }
-                var elasped = new Date() - start_time;
-                if (elasped < timeout_secs * 1000) {
-                    setTimeout(attempt_exec_page_action, 100, page_name, start_time, timeout_secs, action_fn);
-                } else {
-                    alert("Unable to locate link to page '" + page_name + "' after " + timeout_secs + " second(s).");
-                }
-            }
-            window.addEventListener("load", function() {
-                attempt_exec_page_action("%s", new Date(), %d, function(link) {
-                    %s
-                });
-            });
-        </script>
-    """ % (page_name, timeout_secs, action_script)
-    html(page_script, height=0)
-
-hide_page("02-📊-Student Wellbeing")
-hide_page("03-📄-Book Appointment")
-hide_page("05 -🧑 Profile")
-hide_page("06-🫂-Support Group Chat")
-hide_page("07-💬-Counselor Chat")
-hide_page("08 -🛠️ Toolkit")
-hide_page("10-📄-About")
-
-hide_page("study")
-hide_page("test")
-hide_page("listen")
-hide_page("meditate")
-hide_page("journal")
+hide_pages(['meditate', 'read', 'study'])
 
 # Google Sheets Connection
 conn = st.connection("user", type=GSheetsConnection)
@@ -90,7 +36,6 @@ def update_data(survey_type):
 
 # Initialize
 cf.load_initial_data_if_needed(force = True)
-placeholder = st.empty()
 
 # Title
 # st.image(logo_imglink, width=100)
@@ -107,11 +52,13 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
+placeholder = st.empty()
+with placeholder:
+    with st.container(border=True):
+        st.write('🔓 Try this sample student ID: s222869, password: hello876')
+
 # User Authentication
 def check_password():
-    # Sample
-    placeholder.write('Try this sample student ID: s222869, password: hello876')
-
     # Log-in
     def log_in():
         with st.form('Credentials'):
@@ -178,6 +125,22 @@ with st.expander(label=f'📅 How are you today, {st.session_state.name}?'):
     
     if st.session_state.mood_button:
         update_data('d')
+
+# Welcome
+show_pages(
+    [
+        Page('Home.py', 'Homepage', '👤'),
+        Page('menu_pages/wellbeing.py', 'Student Wellbeing', '📊'),
+        Page('menu_pages/profile.py', f'{st.session_state.name}\'s Profile', '🧑'),
+        Page('menu_pages/toolkit.py', f'{st.session_state.name}\'s Toolkit', '🛠️'),
+        Page('menu_pages/appointment.py', 'Set an Appointment', '📄'),
+        Page('menu_pages/support.py', 'Chat with Support Group', '🫂'),
+        Page('menu_pages/counselor.py', 'Chat with Counselor', '💬'),
+        Page('menu_pages/support.py', 'About', '💡'),
+        
+    ]
+
+)
 
 # About Bughaw
 st.header('Get to know your Bughaw!')

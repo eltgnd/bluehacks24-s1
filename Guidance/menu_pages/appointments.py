@@ -6,17 +6,15 @@ import streamlit.components.v1 as components
 from datetime import datetime
 import calendar
 
+# Initialize counselors
+counselors = {'g001' : 'counselor_1_calendar', 'g002' : 'counselor_2_calendar'}
 
 @st.cache_resource(ttl=0, max_entries = 1)
-def connect_to_database(user_id):
+def connect_to_database():
     """
     Connects to the appointments database.
     """
     conn = st.connection("appointments", type=GSheetsConnection)
-
-    result_df = conn.read(worksheet = 'appointments',
-                          ttl = 0)
-
     return conn
 
 def reformat_datetime(datetime_string):
@@ -37,12 +35,6 @@ def reformat_datetime(datetime_string):
     return dt
 
 if __name__ == "__main__":
-    
-    # PLACEHOLDERS TO BE DELETED
-    # once user login implemented
-    name = 'Aames'
-    user_id = 'counselor_1'
-
     # Page symbol
     emoji = ":page_facing_up:"
    
@@ -61,15 +53,16 @@ if __name__ == "__main__":
     calendars = ['counselor_1_calendar', 
                  'counselor_2_calendar']
  
-    st.markdown("(PROJECT TITLE)") # Name of our project will be displayed in small text above the current page title.
+    # Caption
+    st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
     st.title(f"{emoji} Appointments")
-
+    
     # ---------
-    conn = connect_to_database(user_id = user_id)
+    conn = connect_to_database()
     dt_now = datetime.now() # Obtain date and time now
 
     st.markdown(f"""
-    ## Hello, {name}!
+    ## Hello, {st.session_state.name}!
 
     This page contains your past and upcoming appointments.
 
@@ -80,8 +73,8 @@ if __name__ == "__main__":
     # as a substring
     # Reference: [wait nawawala]
     selected_calendar = [calendar for calendar in calendars if 
-                         user_id in calendar][0]
-       
+                         counselors[st.session_state.counselor_id] == calendar][0]
+
    # Different views for the selectbox
    # Select is default/placeholder
     views = ['Select', 'Calendar', 'List']
@@ -96,8 +89,8 @@ if __name__ == "__main__":
         
     elif views == 'List':
         # Query the appointments calendar of the guidance counselor logged in.
-        sql = f"""SELECT {selected_calendar} AS Schedule, username AS Username, anonymous AS Anonymous, 
-        online_or_onsite AS 'Online or Onsite?' FROM appointments;"""
+        sql = f"""SELECT {selected_calendar} AS Schedule, username AS Username, anonymous AS Anonymous, online_or_onsite AS 'Online or Onsite?' FROM appointments;"""
+        
         df = conn.query(sql=sql).dropna(how='any') # Drop empties
         df['date_modified'] = df['Schedule'].apply(reformat_datetime) # Reformat the appointment schedules to a format we can use for comparison
         

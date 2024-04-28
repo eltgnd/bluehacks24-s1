@@ -13,8 +13,8 @@ def turn_int(x):
 conn = st.connection("survey", type=GSheetsConnection)
 
 # Title
+st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
-st.write(f'User ID: {st.session_state.counsellor_id}')
 st.markdown("""
     View descriptive analytics from student-provided data.
 """)
