@@ -129,15 +129,25 @@ style_metric_cards(border_left_color='#023E8A', border_radius_px=7, box_shadow=F
 st.divider()
 
 # Features Overview
-option = st.radio('Get to know Bughaw\'s features!', ['Appointment Calendar', 'Student Dashboard', 'Database Page', 'Group Chat System', 'Profile Tab'])
+
 descriptions = {
-'Appointment Calendar':"",
-'Student Dashboard':"",
-'Database Page':"",
-'Group Chat System':"",
-'Profile Tab':"The Profile Tab is a repository of your personal information that also allows you to track your own mental health journey through a series of easily comprehensible statistical analysis of your past survey responses."
+    'Manage Appointments': '''Effortlessly manage counseling appointments for your students. Stay organized with a clear overview of past and upcoming sessions, and easily reschedule or cancel appointments as needed. Our intuitive system streamlines the appointment process, allowing you to focus on providing quality care to your students.''',
+
+    'Private Chat': '''Engage in confidential one-on-one chats with students to offer personalized support and guidance. Our secure messaging feature ensures privacy and fosters trust, allowing students to share their concerns openly. Provide timely assistance and encouragement to students in need, right from your dashboard.''',
+
+    'Support Group Chat': '''Moderate anonymous group chats where students can connect with peers facing similar challenges. Create a supportive community where students can share experiences, offer encouragement, and provide mutual support. Foster a sense of belonging and inclusivity, regardless of cultural background or identity.''',
+
+    'Data Analytics': '''Gain valuable insights from survey data to inform your counseling strategies and interventions. Analyze trends, identify areas of concern, and track student progress over time. Use data-driven insights to advocate for resources, tailor programs, and implement effective support systems for your students.'''
 }
 
+emoji = {
+    'Manage Appointments': "Manage Appointments 📋",
+    'Private Chat': "Private Chat 💬",
+    'Support Group Chat': "Support Group Chat 🫂",
+    'Data Analytics': "Data Analytics 📊"
+}
+
+option = st.radio('Get to know Bughaw\'s features!', list(emoji.keys()))
 with st.container(border=True):
-    st.subheader(option)
+    st.subheader(emoji[option])
     st.write(descriptions[option])
