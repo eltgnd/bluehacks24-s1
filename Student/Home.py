@@ -36,7 +36,7 @@ def update_data(survey_type):
 cf.load_initial_data_if_needed(force = True)
 
 # Title
-st.image('images/BUGHAW.png', width=100)
+st.image('images/BUGHAW.png', width=150)
 add_vertical_space(1)
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 
