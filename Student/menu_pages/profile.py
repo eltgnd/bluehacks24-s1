@@ -12,7 +12,7 @@ conn = st.connection("survey", type=GSheetsConnection)
 # Title
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
-st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.write('Welcome user! Your profile is your personal space to track your mental health journey and access resources tailored to your needs. Take control of your well-being by updating your information and exploring the features available to you. Monitor your progress with visualizations of your survey responses, and utilize our toolkit to discover coping strategies that work best for you. Your profile is a reflection of your commitment to self-care, and we\'re here to support you every step of the way.')
 
 with st.container(border=True):
     st.write(f'Student ID: {st.session_state.student_id}')

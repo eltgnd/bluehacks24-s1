@@ -11,7 +11,7 @@ st.set_page_config(
 )
 # Title
 st.title(f"🛠️ {st.session_state.name}\'s Toolkit")
-st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.write('Welcome to the Toolkit page! Here, you\'ll find a range of resources designed to help you build a personalized mental wellness toolkit. Whether you\'re looking for relaxation techniques, stress management strategies, or self-care practices, we\'ve got you covered. Explore our selection of tools, including journaling prompts, guided meditations, and coping skills exercises, all aimed at promoting your mental well-being. Empower yourself to take charge of your mental health journey and discover techniques that resonate with you. Your toolkit is your go-to resource for cultivating resilience and finding balance in your everyday life.')
 st.divider()
 
 # Assuming mood and mood_list are defined elsewhere
@@ -60,7 +60,10 @@ def image_to_base64(image):
 col1, col2 = st.columns([20,30])
 
 with col1:
-    st.write('💡 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+    st.write('Study 💡: Dive into our Study page to discover tips and tricks for optimizing your academic performance. From effective study techniques to time management strategies, we\'ve curated resources to help you excel in your studies. Whether you\'re preparing for exams or tackling a challenging assignment, our Study page is your guide to academic success. 📖✏️')
+    st.write('Meditate 🧘: Step into tranquility with our Meditate page, where you can embark on a journey of mindfulness and inner peace. Explore guided meditation sessions, breathing exercises, and relaxation techniques to calm your mind and soothe your soul. Take a moment to pause, breathe, and reconnect with yourself amidst the busyness of life. Find your center and cultivate a sense of serenity with our meditation resources. 🌿☮️')
+
+#Read 📚: Immerse yourself in a world of knowledge and inspiration with our Read page. Discover a curated collection of articles, blogs, and resources on mental health, self-care, and personal development. From expert insights to real-life stories, there's something for everyone to explore. Expand your mind, gain new perspectives, and empower yourself with the wisdom found within the pages of our Read section. 📖🌟')
 
 # Displaying buttons on the right
 with col2:

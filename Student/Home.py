@@ -95,15 +95,15 @@ if not check_password():
 placeholder.empty()
 
 # Information about the app
-st.write('Welcome to Bughaw Students\' Portal. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.write('Welcome to Bughaw Students\' Portal. Here, we believe that mental well-being is a fundamental aspect of student success. Our platform is dedicated to providing you with the tools and support you need to navigate the challenges of academic life while prioritizing your mental health. Whether you\'re looking for self-care resources, seeking guidance from a counselor, or connecting with peers in a safe space, Bughaw is here for you. Join us on your journey to empowerment and resilience.')
 col1, col2 = st.columns(2)
 with col1:
     with st.expander(label='WHAT IS BUGHAW', expanded=False):
-        st.write('Lorem ipsum')
+        st.write("Bughaw is a web-based platform designed to address mental health issues among Filipino students, offering features like well-being check-ins, personalized toolkits, appointment scheduling, and anonymous support groups. It aims to provide accessible and data-driven solutions for students and counselors alike. ")
 with col2:
     with st.expander(label='WHY BUGHAW'):
         section_text = ''
-        st.markdown(f"**:blue[Ratio something something.]**\n\n{section_text}")
+        st.markdown("The current counselor-to-student proportion among Philippine schools faces a staggering alarming ratio of 1 counselor for every 14,000 students, compared to the recommended global standard of 1:250. Hence, there is a growing need to further address this declining mental health and wellbeing among Filipino high school and college students.")
 
 # Daily wellbeing
 st.session_state.mood_button = False

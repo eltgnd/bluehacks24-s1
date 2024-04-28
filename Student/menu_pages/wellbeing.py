@@ -47,7 +47,7 @@ st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 
 name = st.session_state.name
 st.title(f'Hi {name.capitalize()}, kumusta ka? 👋')
-st.write('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.')
+st.write('Your well-being matters to us. At Bughaw, we understand that navigating the ups and downs of student life can sometimes feel overwhelming. That\'s why we\'ve created this space for you to check in with yourself and access support when you need it. Take a moment to reflect on how you\'re feeling today. Our well-being check-ins are designed to help you recognize and address any challenges you may be facing. Remember, you\'re not alone in this journey. We\'re here to support you every step of the way.')
 
 # Show streak
 # col1, col2, col3 = st.columns(3)
