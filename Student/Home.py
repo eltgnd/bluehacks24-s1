@@ -12,11 +12,6 @@ from PIL import Image
 
 st.set_page_config(page_title='Bughaw Students\' Portal', page_icon='💙', layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-# hide_pages(['meditate', 'read', 'study'])
-
-
-
-
 # Google Sheets Connection
 conn = st.connection("user", type=GSheetsConnection)
 
@@ -41,7 +36,7 @@ def update_data(survey_type):
 cf.load_initial_data_if_needed(force = True)
 
 # Title
-# st.image(logo_imglink, width=100)
+st.image('images/BUGHAW.png', width=100)
 add_vertical_space(1)
 st.caption('BUGHAW   |   STUDENTS\' PORTAL')
 
