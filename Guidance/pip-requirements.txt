@@ -22,3 +22,10 @@ google-auth==2.29
 pillow==10.0
 beautifulsoup4==4.12
 pip==24.0
+
+streamlit-extras
+streamlit-image-select
+st-pages
+st-gsheets-connection
+pytube
+art
