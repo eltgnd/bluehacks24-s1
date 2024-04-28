@@ -156,7 +156,7 @@ if choice == options[2]:
 
     # Place question
     options = [str(i) for i in range(1,8)]
-    if st.session_state.gq > 12:
+    if st.session_state.mq > 12:
         st.write('Successfully submitted!')
         st.session_state.submitted_m = True
         update_data('m')
