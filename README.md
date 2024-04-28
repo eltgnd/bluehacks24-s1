@@ -28,5 +28,3 @@ Alibudbud, R. (2021). Academic Experiences as Determinants of Anxiety and Depres
 Muralidhar, K. S. V. (2023, July 7). How to Build an RSS feed-based News app with Streamlit, Heroku, and Android Studio? Medium. https://ksvmuralidhar.medium.com/how-to-build-an-rss-feed-based-news-app-with-streamlit-heroku-and-android-studio-cc4ebb1077e
 
 Snowflake Inc. (2024). API Reference. Streamlit Docs. https://docs.streamlit.io/
-
-""")
