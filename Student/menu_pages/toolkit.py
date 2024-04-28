@@ -7,7 +7,7 @@ from streamlit.components.v1 import html
 st.set_page_config(
     page_title = f'{st.session_state.name}\'s Toolkit',
     page_icon = "🛠️",
-    initial_sidebar_state = "expanded",ß
+    initial_sidebar_state = "expanded",
 )
 # Title
 st.title(f"🛠️ {st.session_state.name}\'s Toolkit")
