@@ -20,6 +20,7 @@ st.caption('BUGHAW   |   GUIDANCE COUNSELORS\' PORTAL')
 st.title(f'Welcome {st.session_state.name}! 👋')
 st.markdown("""
     Welcome to the Data Analytics section, where counselors gain valuable insights into students' survey data to inform policy decisions and program development. Here, you'll find a comprehensive overview of survey results, aggregated and categorized based on various metrics such as demographics and time periods. Use this data to identify trends, understand student needs, and tailor interventions effectively. Your data-driven approach plays a vital role in promoting student well-being and fostering a supportive learning environment. Together, let's harness the power of information to create positive change.        
+    
     Choose a question and *then* choose a descriptive statistic.
 """)
 
@@ -105,7 +106,7 @@ with st.expander('Monthly Wellbeing'):
     sql = f"""SELECT "Monthly Survey", Date FROM Sheet1 ORDER BY Date;"""
     df = conn.query(sql=sql, ttl=0).dropna(how='any')
 
-    for i in range(12):
+    for i in range(13):
         df[i] = df['Monthly Survey'].str[1:-1].str.split(',').str[i]
         df[i] = df[i].apply(turn_int)
 
